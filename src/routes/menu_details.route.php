@@ -31,8 +31,6 @@ $arr_new = implode(', ', $arr);
 
 $related_products = getRelatedProducts($_GET['product_id']);
 
-include ("../src/routes/auth.route.php");
-include ("../src/routes/reg.route.php");
 
 include ("../src/widgets/recent_post.widget.php");
 include ("../templates/menu_details.phtml");

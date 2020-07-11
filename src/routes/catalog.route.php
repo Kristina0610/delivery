@@ -96,8 +96,5 @@ $stmt->execute();
 $tags = $stmt->fetchAll();
 
 
-
-include ("../src/routes/auth.route.php");
-include ("../src/routes/reg.route.php");
 include ("../src/widgets/recent_post.widget.php");
 include ("../templates/catalog.phtml");

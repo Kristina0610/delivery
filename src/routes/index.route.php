@@ -9,7 +9,6 @@ $favorite_products = $stmt->fetchAll();
 
 
 
-include ("../src/routes/auth.route.php");
-include ("../src/routes/reg.route.php");
+
 
 include ("../templates/index.phtml");

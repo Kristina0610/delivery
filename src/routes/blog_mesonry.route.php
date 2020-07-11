@@ -56,7 +56,6 @@ foreach ($bind_where as $key => $value) {
 $stmt->execute();
 $articles = $stmt->fetchAll();
 
-include ("../src/routes/auth.route.php");
-include ("../src/routes/reg.route.php");
+
 
 include("../templates/blog_mesonry.phtml");
