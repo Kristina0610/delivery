@@ -1,0 +1,24 @@
+<!-- <?php use Carbon\Carbon; ?>-->
+ <!-- Start Recent Post -->
+                            <div class="food__recent__post mt--60">
+                                <h4 class="side__title">Последние статьи</h4>
+                                <div class="recent__post__wrap">
+                                    <!-- Start Single Post -->
+                                    <?php foreach ($articles as $article) :?>
+                                    <div class="single__recent__post d-flex">
+                                        <div class="recent__post__thumb">
+                                            <a href="/?section=blog_details">
+                                                <img src="images/blog/<?php echo $article['id']; ?>/<?php echo $article['image_small']; ?>" alt="post images">
+                                            </a>
+                                        </div>
+                                        <div class="recent__post__details">
+                                            <span><?php echo \Carbon\Carbon::parse($article['event_at'])->format('d.m.Y'); ?></span>
+                                            <h4><a href="blog-details.html"><?php echo $article['title']; ?></a></h4>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                                    <!-- End Single Post -->
+                                </div>
+                            </div>
+                            <!-- End Recent Post -->
+                    

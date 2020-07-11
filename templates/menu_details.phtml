@@ -1,0 +1,241 @@
+<?php require_once("top.phtml"); ?>
+</head>
+<body>
+	<!--[if lte IE 9]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+
+	<!-- Add your site or application content here -->
+	
+	<!-- <div class="fakeloader"></div> -->
+
+	<!-- Main wrapper -->
+	<div class="wrapper" id="wrapper">
+		<?php require_once("header.phtml"); ?>
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area bg-image--28">
+            <div class="ht__bradcaump__wrap d-flex align-items-center">
+                <div class="slider-text-black container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="bradcaump__inner text-center">
+                                <h2 class="bradcaump-title">Категория кухни</h2>
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/?section=index">Главная</a>
+                                  <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
+                                  <span class="breadcrumb-item active">Категория кухни</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area --> 
+        <!-- Start Blog List View Area -->
+        <section class="blog__list__view section-padding--lg menudetails-right-sidebar bg--white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-sm-12">
+                        <div class="food__menu__container">
+                            <div class="food__menu__inner d-flex flex-wrap flex-md-nowrap flex-lg-nowrap">
+                                <div class="food__menu__thumb">
+                                    <img src="images/product/<?php echo $product['id'].'/'.$product['photo_menu']; ?>">
+                                </div>
+                                <div class="food__menu__details">
+                                    <div class="food__menu__content">
+                                        <h2><?php echo $product['name']; ?></h2>
+                                        <ul class="food__dtl__prize d-flex">
+                                            <li><?php echo $product['price']; ?>&nbsp;&#8381;</li>
+                                        </ul>
+                                        <p><?php if (!is_null($product['weight'])) : ?>
+                                                    <p><img src="https://img.icons8.com/ios-glyphs/16/000000/scales.png"/>&nbsp;<b>Вес:</b> <?php echo $product['weight']; ?> г <br>
+                                                <?php endif; ?>  
+                                                <?php if (!is_null($product['kkal'])) : ?> 
+                                                     <img src="https://img.icons8.com/android/16/000000/flex-biceps.png"/>&nbsp;<b>Энергоценность:</b> <?php echo $product['kkal']; ?> ккал <br>
+                                                <?php endif; ?>
+                                                <?php if (!is_null($product['ingredients'])) : ?>
+                                                     <img src="https://img.icons8.com/material-outlined/16/000000/align-cell-content-top.png"/>&nbsp;
+                                                    <!--<b>Состав:</b> <?php echo @implode(', ', json_decode($product['ingredients'])); ?>-->
+                                                    <b>Теги:</b>
+                                                    <!--Второй вариант вывода тегов из БД начало-->
+                                                    <?php foreach ($arr as $tag_id => $tag_name) : ?>
+                                                        <?php @$tags_str .= '<a href="/?section=catalog&tag_id='.$tag_id.'">'.$tag_name.'</a>, '; ?>
+                                                    <?php endforeach; ?>
+                                                    <?php echo isset($tags_str) ? mb_substr($tags_str, 0, -2) : "&nbsp;"; ?>
+                                                    <!--Второй вариант вывода тегов из БД конец-->
+                                                <?php endif; ?></p><br>
+                                                <?php echo $product['parent_category'] ? $product['parent_category']['name'] : $product['category_name']; ?>
+                                        <div class="product-action-wrap">
+                                           <!-- <div class="prodict-statas"><span><?php echo $product['parent_category'] ? $product['parent_category']['name'] : $product['category_name']; ?></span></div>-->
+                                            <div class="product-quantity">
+                                                <form id='myform' method='POST' action='#'>
+                                                    <div class="product-quantity">
+                                                        <div class="cart-plus-minus">
+                                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="02">
+                                                            <div class="add__to__cart__btn">
+                                                                <a class="food__btn" href="cart.html">В корзину</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Start Product Descrive Area -->
+                            <div class="menu__descrive__area">
+                                <div class="menu__nav nav nav-tabs" role="tablist">
+                                    <a class="active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab">Описание</a>
+                                </div>
+                                <!-- Start Tab Content -->
+                                <div class="menu__tab__content tab-content" id="nav-tabContent">
+                                    <!-- Start Single Content -->
+                                    <div class="single__dec__content fade show active" id="nav-all" role="tabpanel">
+                                        <p><?php echo $product['comment']; ?></p>
+                                        <p><?php echo $product['comment']; ?></p>
+                                    </div>
+                                    <!-- End Single Content -->
+                                    <!-- Start Single Content -->
+                                    <div class="single__dec__content fade" id="nav-breakfast" role="tabpanel">
+                                        <div class="review__wrapper">
+                                            <!-- Start Single Review -->
+                                            <div class="single__review d-flex">
+                                                <div class="review__thumb">
+                                                    <img src="images/testimonial/rev/1.jpg" alt="review images">
+                                                </div>
+                                                <div class="review__details">
+                                                    <h3>Robart Hanson</h3>
+                                                    <div class="rev__meta d-flex justify-content-between">
+                                                        <span>Admin - February  13,  2018</span>
+                                                        <ul class="rating">
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipis icing elit, sed tdomino eiusd tempor incididunt ut labore et dolore magna aliqua. Ut e veniam, quis nostrud exercitation ullamco laboris nisi ut aliquiconsequat.</p>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Review -->
+                                            <!-- Start Single Review -->
+                                            <div class="single__review d-flex">
+                                                <div class="review__thumb">
+                                                    <img src="images/testimonial/rev/2.jpg" alt="review images">
+                                                </div>
+                                                <div class="review__details">
+                                                    <h3>Robart Hanson</h3>
+                                                    <div class="rev__meta d-flex justify-content-between">
+                                                        <span>Admin - February  13,  2018</span>
+                                                        <ul class="rating">
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipis icing eltempor incididunt labore et dolore magna aliqua. Ut enim adm veniam, quis nostrud exercitation.</p>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Review -->
+                                        </div>
+                                    </div>
+                                    <!-- End Single Content -->
+                                </div>
+                                <!-- End Tab Content -->
+                            </div>
+                            <!-- End Product Descrive Area -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="popupal__menu">
+                                    <h4>Рекомендуем попробовать</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt--30">
+                            <!-- Start Single Product -->
+                            <?php foreach ($related_products as $rp) : ?>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="beef_product">
+                                    <div class="beef__thumb">
+                                        <a href="?section=menu_details&product_id=<?php echo $rp['id']; ?>">
+                                            <img src="images/product/<?php echo $rp['id']; ?>/<?php echo $rp['photo_menu']; ?>" alt="beef images">
+                                        </a>
+                                    </div>
+                                    <div class="beef__hover__info">
+                                        <div class="beef__hover__inner">
+                                            <span>Special</span>
+                                            <span>offer</span>
+                                        </div>
+                                    </div>
+                                    <div class="beef__details">
+                                        <h4><a href="?section=menu_details&product_id=<?php echo $rp['id']; ?>"><?php echo $rp['name']; ?></a></h4>
+                                        <ul class="beef__prize">
+                                            <li class="old__prize"><?php echo round($product['price']*1.2)-1; ?>&nbsp;&#8381;</li>
+                                            <li><?php echo $product['price']; ?>&nbsp;&#8381;</li>
+                                        </ul>
+                                        <p><?php echo mb_substr($rp['comment'],0,20)."..."; ?></p>
+                                        <div class="beef__cart__btn">
+                                            <a href="cart.html">В корзину</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                            <!-- End Single Product -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 md--mt--40 sm--mt--40">
+                        <div class="food__sidebar">
+                            <!-- БОКОВАЯ ПАНЕЛЬ С СОПУТСТВУЮЩИМИ ТОВАРАМИ-->
+                            <div class="food__search">
+                                <h4 class="side__title">Поиск</h4>
+                                <div class="serch__box">
+                                    <input type="text" placeholder="Введите ключевое слово">
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <!-- End Search Area -->
+                           <?php include ("../templates/widgets/recent_post.widget.phtml"); ?>
+                            <!-- Start Sidebar Contact -->
+                            <div class="sidebar__contact mt--60">
+                                <div class="sidebar__thumb">
+                                    <img src="images/blog/sidebar/2.jpg" alt="sidebar images">
+                                </div>
+                                <div class="sidebar__details">
+                                    <h4>colorful</h4>
+                                    <h2>donut’s</h2>
+                                    <span>get it till the stock full</span>
+                                </div>
+                                <div class="sidebar__con__btn">
+                                    <a href="#">Contact Now<i class="fa fa-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- End Sidebar Contact -->
+                            <!-- Start Sidebar Instagram -->
+                            <div class="sidebar__instagram mt--60">
+                                <h4 class="side__title">Instagram</h4>
+                               <!-- SnapWidget -->
+<iframe src="https://snapwidget.com/embed/846433" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden;  width:255px; height:170px"></iframe>
+                            </div>
+                            <!-- End Sidebar Instagram -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Blog List View Area -->
+        <?php require_once("footer.phtml"); ?>
+        <?php require_once("login_wrapper.phtml"); ?>
+        <?php require_once("cartbox.phtml"); ?>  
+	</div><!-- //Main wrapper -->
+    
+
+	<?php require_once("bottom.phtml"); ?>
+</body>
+</html>

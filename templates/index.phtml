@@ -1,0 +1,138 @@
+<?php require_once("top.phtml"); ?>
+</head>
+<body>
+	<!--[if lte IE 9]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+
+	<!-- Add your site or application content here -->
+	
+	<!-- <div class="fakeloader"></div> -->
+
+	<!-- Main wrapper -->
+	<div class="wrapper" id="wrapper">
+		<?php require_once("header.phtml");?>
+        <!-- Start Slider Area -->
+        <div class="slider__area slider--one">
+            <div class="slider__activation--1">
+                <!-- Start Single Slide -->
+                <div class="slide fullscreen bg-image--27">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="slider__content">
+                                    <div class="slider__inner">
+                                        <div class="slider__input">
+                                            <div class="src__btn">
+                                            <a href="#">ЗАКАЗАТЬ ОБРАТНЫЙ ЗВОНОК</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Slide -->
+            </div>
+        </div>
+        <!-- End Slider Area -->
+        <!-- Start Food Category -->
+        <section class="food__category__area bg--white" style="padding-bottom: 80px;">
+            <div class="container">
+                <div class="food__category__wrapper mt--40">
+                    <div class="row">
+                        <?php foreach($in_home as $category) : ?>
+                        <!-- Start Single Category -->
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="food__item foo">
+                                <div class="food__thumb">
+                                    <a href="menu-details.html">
+                                        <img src="images/in_home/<?php echo($category['image']); ?>" alt="product images">
+                                    </a>
+                                </div>
+                                <div class="food__title">
+                                    <h2><a href="/?section=catalog&category_id=<?php echo($category['id']); ?>"><?php echo($category['name']); ?></a></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Category -->
+                    <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Food Category -->
+        <!-- Start Special Menu -->
+        <section class="fd__special__menu__area bg-image--3 section-pt--lg">
+            <div class="container slider-text-black">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="section__title service__align--center">
+                            <h2 class="title__line">Наши акции и супер-предложения</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="special__food__menu mt--80">
+                <div class="food__menu__prl bg-image--4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                
+                                <div class="fd__tab__content tab-content" id="nav-tabContent">
+                                    <!-- Start Single tab -->
+                                    <div class="single__tab__panel tab-pane fade show active" id="nav-all" role="tabpanel">
+                                        <div class="tab__content__wrap">
+                                            <!-- Start Single Tab Content -->
+                                            <div class="single__tab__content">
+                                                <?php foreach ($favorite_products as $fp) : ?>
+                                                <!-- Start Single Food -->
+                                                <div class="food__menu">
+                                                    <div class="food__menu__thumb">
+                                                        <a href="menu-details.html">
+                                                            <img src="images/product/<?php echo $fp['id']; ?>/<?php echo $fp['photo_small']; ?>" alt="product images">
+                                                        </a>
+                                                    </div>
+                                                    <div class="food__menu__details">
+                                                        <div class="fd__menu__title__prize">
+                                                            <h4><a href="/?section=product&id=<?php echo $fp['id']; ?>"><?php echo $fp['name']; ?></a></h4>
+                                                            <span class="menu__prize">&#8381;<?php echo $fp['price']; ?></span>
+                                                        </div>
+                                                        <div class="fd__menu__details">
+                                                            <p>Категория : <a href="/?section=catalog&id=<?php echo $fp['category_id']; ?>"><?php echo $fp['category_name']; ?></a></p>
+                                                            <div class="delivery__time__rating">
+                                                                <p>Kkal на 100 г : <?php echo $fp['kkal']; ?></p>
+                                                                <ul class="fd__rating">
+                                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                                    <li><i class="zmdi zmdi-star"></i></li>
+                                                                    <li class="rating__opasity"><i class="zmdi zmdi-star"></i></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Single Food -->
+                                                <?php endforeach; ?>
+                                            </div>
+                                            <!-- End Single Tab Content -->
+                                        </div>
+                                    </div>
+                                    <!-- End Single tab -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>      
+        <!-- End Special Menu -->
+        <?php require_once("footer.phtml"); ?>
+        <?php require_once("login_wrapper.phtml"); ?>
+        <?php require_once("cartbox.phtml"); ?>
+    </div><!-- //Main wrapper -->
+    <?php require_once("bottom.phtml"); ?>
+</body>
+</html>

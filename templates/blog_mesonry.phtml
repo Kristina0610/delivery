@@ -1,0 +1,86 @@
+<?php require_once("top.phtml"); ?>
+</head>
+<body>
+	<!--[if lte IE 9]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+
+	<!-- Add your site or application content here -->
+	
+	<!-- <div class="fakeloader"></div> -->
+
+	<!-- Main wrapper -->
+	<div class="wrapper" id="wrapper">
+		<?php require_once("header.phtml"); ?>
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area bg-image--19">
+            <div class="ht__bradcaump__wrap d-flex align-items-center">
+                <div class="slider-text-black container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="bradcaump__inner text-center brad__white">
+                                <h2 class="bradcaump-title">Блог статей</h2>
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="?/section=index">Гланая</a>
+                                  <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
+                                  <span class="breadcrumb-item active">Блог masonry grid</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area --> 
+        <!-- Start Blog Masonry Area -->
+        <section class="blog__masonery__area bg--white section-padding--lg">
+            <div class="container blog__masonry__container">
+                <div class="row blog__masonery__wrap">
+                    <!-- Start Single Masonry -->
+                    <?php foreach ($articles as $article) : ?>
+                        <div class="col-lg-4 col-md-6 col-sm-12 bl__item">
+                            <div class="blog__masonry foo">
+                                <div class="bl__maso__thumb">
+                                    <a href="/?section=blog_details&article_id=<?php echo $article['id']; ?>">
+                                        <img src="images/blog/<?php echo $article['id']; ?>/<?php echo $article['image']; ?>" alt="masonry images">
+                                    </a>
+                                </div>
+                                <div class="bl__mass__content">
+                                    <ul class="bl__maso__meta">
+                                        <li><?php echo \Carbon\Carbon::parse($article['event_at'])->format('d.m.Y'); ?></li>
+                                    </ul>
+                                    <h2><a href="/?section=blog_details&article_id=<?php echo $article['id']; ?>"><?php echo $article['title']; ?></a></h2>
+                                    <p><?php echo mb_substr($article['text'], 0,200)."..."; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                    
+                   
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="food__pagination d-flex justify-content-center align-items-center mt--130">
+                            <li><a href="/?<?php echo $build_query.'&page=1'; ?>"><i class="zmdi zmdi-chevron-left">
+                            </i></a></li>
+                                <?php for ($i=1; $i <= $page_count; $i++) : ?>
+                                    <?php $class = $i == $page ? "active" : ""; ?>
+                                    <li class="<?php echo $class; ?>"><a href="/?<?php echo $build_query.'&page='.$i; ?>">
+                                    <?php echo $i; ?></a></li>
+                                <?php endfor; ?>
+                            <li><a href="/?<?php echo $build_query.'&page='.$page_count; ?>"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Blog Masonry Area -->
+        <?php require_once("footer.phtml"); ?>
+        <?php require_once("login_wrapper.phtml"); ?>
+        <?php require_once("cartbox.phtml"); ?>  
+	</div><!-- //Main wrapper -->
+    
+    <?php require_once("bottom.phtml"); ?>
+
+</body>
+</html>

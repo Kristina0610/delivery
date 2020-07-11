@@ -1,0 +1,66 @@
+  <!-- Login Form -->
+        <div class="accountbox-wrapper">
+            <div class="accountbox text-left">
+                <ul class="nav accountbox__filters" id="myTab" role="tablist">
+                    <li>
+                        <a class="active" id="log-tab" data-toggle="tab" href="#log" role="tab" aria-controls="log" aria-selected="true">Вход</a>
+                    </li>
+                    <li>
+                        <a id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Регистрация</a>
+                    </li>
+                </ul>
+                <div class="accountbox__inner tab-content" id="myTabContent">
+                    <div class="accountbox__login tab-pane fade show active" id="log" role="tabpanel" aria-labelledby="log-tab">
+                        <form action="#">
+                            <div class="single-input">
+                                <input class="cr-round--lg" type="text" placeholder="Номер телефона">
+                            </div>
+                            <div class="single-input">
+                                <input class="cr-round--lg" type="password" placeholder="Пароль">
+                            </div>
+                            <div class="single-input">
+                                <button type="submit" name="auth_submit" class="food__btn"><span>Вперёд</span></button>
+                            </div>
+                            <div class="accountbox-login__others">
+                                <h6>Войти с помощью</h6>
+                                <div class="social-icons">
+                                    <ul>
+                                        <li class="facebook"><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                                        <li class="twitter"><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                                        <li class="pinterest"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>                            
+                            </div>
+                        </form>
+                    </div>
+                    <div class="accountbox__register tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <form action="#">
+                            <div class="single-input">
+                                <input class="cr-round--lg" type="text" placeholder="Имя">
+                               <!-- <input class="cr-round--lg" type="text" name="firstname"  placeholder="Имя">
+                                <?php if (isset($errors['firstname'])) : ?>
+                                    <label id="firstname-error" class="error" for="firstname"><?php echo $errors['firstname']; ?></label>
+                                <?php endif; ?>-->
+                            </div>
+                            <div class="single-input">
+                                <input class="cr-round--lg" type="text" placeholder="Фамилия">
+                            </div>
+                            <div class="single-input">
+                                <input class="cr-round--lg" type="phone" placeholder="Номер телефона">
+                            </div>
+                            <div class="single-input">
+                                <input class="cr-round--lg" type="password" placeholder="Пароль">
+                            </div>
+                            <div class="single-input">
+                                <input class="cr-round--lg" type="password" placeholder="Повтор пароля">
+                            </div>
+                            <div class="single-input">
+                                <button type="submit" name="reg_submit" class="food__btn"><span>Зарегистрироваться</span></button>
+                            </div>
+                        </form>
+                    </div>
+                    <span class="accountbox-close-button"><i class="zmdi zmdi-close"></i></span>
+                </div>
+            </div>
+        </div><!-- //Login Form -->
+
