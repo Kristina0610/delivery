@@ -13,13 +13,15 @@
                     <div class="accountbox__login tab-pane fade show active" id="log" role="tabpanel" aria-labelledby="log-tab">
                         <form action="#">
                             <div class="single-input">
-                                <input class="cr-round--lg" type="text" placeholder="Номер телефона">
+                                <input class="cr-round--lg" type="text" id="auth_phone" placeholder="Номер телефона">
+                                <div id="error-phone" name="errors"></div>
                             </div>
                             <div class="single-input">
-                                <input class="cr-round--lg" type="password" placeholder="Пароль">
+                                <input class="cr-round--lg" type="password" id="auth_password" placeholder="Пароль">
+                                <div id="error-password" name="errors"></div>
                             </div>
                             <div class="single-input">
-                                <button type="submit" name="auth_submit" class="food__btn"><span>Вперёд</span></button>
+                                <button type="submit" id="auth_submit" class="food__btn"><span>Вперёд</span></button>
                             </div>
                             <div class="accountbox-login__others">
                                 <h6>Войти с помощью</h6>
@@ -34,30 +36,44 @@
                         </form>
                     </div>
                     <div class="accountbox__register tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <form action="#">
+                        <div id="s1">
                             <div class="single-input">
-                                <input class="cr-round--lg" type="text" placeholder="Имя">
-                               <!-- <input class="cr-round--lg" type="text" name="firstname"  placeholder="Имя">
-                                <?php if (isset($errors['firstname'])) : ?>
-                                    <label id="firstname-error" class="error" for="firstname"><?php echo $errors['firstname']; ?></label>
-                                <?php endif; ?>-->
+                                <input class="cr-round--lg" type="text" id="firstname"  placeholder="Имя">
+                                <div id="error-firstname" name="errors"></div>
                             </div>
                             <div class="single-input">
-                                <input class="cr-round--lg" type="text" placeholder="Фамилия">
+                                <input class="cr-round--lg" type="text" id="secondname" placeholder="Фамилия">
+                                <div  id="error-secondname" name="errors"></div>
                             </div>
                             <div class="single-input">
-                                <input class="cr-round--lg" type="phone" placeholder="Номер телефона">
+                                <input class="cr-round--lg" type="text" id="phone" placeholder="Номер телефона">
+                                <div id="error-phone" name="errors"></div>
+                                <div id="warning-phone" name="warning"></div>
                             </div>
                             <div class="single-input">
-                                <input class="cr-round--lg" type="password" placeholder="Пароль">
+                                <input class="cr-round--lg" type="password" id="password" placeholder="Пароль">
+                                <div id="error-password" name="errors"></div>
                             </div>
                             <div class="single-input">
-                                <input class="cr-round--lg" type="password" placeholder="Повтор пароля">
+                                <input class="cr-round--lg" type="password" id="re_password" placeholder="Повтор пароля">
+                                <div id="error-re_password" name="errors"></div>
                             </div>
                             <div class="single-input">
-                                <button type="submit" name="reg_submit" class="food__btn"><span>Зарегистрироваться</span></button>
+                                <button id="reg_submit" class="food__btn"><span>Зарегистрироваться</span></button>
                             </div>
-                        </form>
+                        </div>
+                        <div id="s2" style="display: none;">
+                          <div class="single-input">
+                                <input class="cr-round--lg" type="text" id="code" placeholder="Введите последние 6-ть цифр номера со входящего звонка">
+                                <div id="error-code" name="errors"></div>
+                            </div>
+                            <div class="single-input">
+                                <button id="reg_finish" class="food__btn"><span>Завершить регистрацию</span></button>
+                            </div>  
+                        </div>
+                        <div id="s3" style="display: none;">
+                          РЕГИСТРАЦИЯ ПРОШЛА УСПЕШНО!!! 
+                        </div>
                     </div>
                     <span class="accountbox-close-button"><i class="zmdi zmdi-close"></i></span>
                 </div>

@@ -13,8 +13,8 @@
 /*==============================
 	CSS INDEX
 ===============================
-
 	Reset
+
 	Typography
 	Helper Class
 	Section Title
@@ -8848,4 +8848,14 @@ input[type="submit"] {
 .current-active {
   font-weight: bold;
   color: black;
+}
+
+[name=errors] {
+  font-size: 16px;
+  color: red;
+}
+
+[name=warning] {
+  font-size: 16px;
+  color: green;
 }

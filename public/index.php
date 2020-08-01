@@ -12,6 +12,7 @@ if(isset($_GET['section'])) {
 }
 
 $user = auth();
+
 $top_menu = topMenu();
 
 

@@ -1,4 +1,17 @@
 <?php
+function authorize($user_id) {
+	global $pdo;
+	$label = uniqid();
+	try{
+		$stmt = $pdo->prepare("INSERT INTO delivery_user_session VALUES(null,?,NOW(),NOW()+INTERVAL 7 DAY,?)");
+		$stmt->execute([$label,$user_id]);
+	} catch (Exception $e) {
+		return false;
+	}
+	setcookie('label',$label,time()+(7*24*60*60),'/');
+	return true;
+}
+
 function auth() {
 	global $pdo;
 	$user = null;

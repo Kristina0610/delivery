@@ -8,7 +8,7 @@ $stmt->execute();
 $favorite_products = $stmt->fetchAll();
 
 
-
+var_dump($user);
 
 
 include ("../templates/index.phtml");
