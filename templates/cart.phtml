@@ -1,0 +1,125 @@
+<?php  require_once("top.phtml"); ?>
+</head>
+<body>
+	<!--[if lte IE 9]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+
+	<!-- Add your site or application content here -->
+	
+	<!-- <div class="fakeloader"></div> -->
+
+	<!-- Main wrapper -->
+	<div class="wrapper" id="wrapper">
+		<!-- Start Header Area -->
+        <?php require_once("header.phtml"); ?>
+        <!-- End Header Area -->
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area bg-image--18">
+            <div class="ht__bradcaump__wrap d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="bradcaump__inner text-center">
+                                <h2 class="bradcaump-title">cart page</h2>
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="index.html">Home</a>
+                                  <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
+                                  <span class="breadcrumb-item active">cart page</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area --> 
+        <!-- cart-main-area start -->
+        <div class="cart-main-area section-padding--lg bg--white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 ol-lg-12">
+                        <form id="update_cart" method="POST" action="/?section=cart">           
+                            <div class="table-content table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr class="title-top">
+                                            <th class="product-thumbnail">Image</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>
+                                            <th class="product-remove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($data['items'] as $item): ?>
+                                            <tr>
+                                                <td class="product-thumbnail">
+                                                    <a href="#">
+                                                        <img src="images/product/<?php echo $item['product_id'];?>/<?php echo $item['photo_small'];?>" alt="product img" />
+                                                    </a>
+                                                </td>
+                                                <td class="product-name"><a href="#"><?php echo $item['name']; ?></a></td>
+                                                <td class="product-price"><span class="amount"><?php echo $item['price']; ?></span></td>
+                                                <td class="product-quantity">
+                                                    <input name="cart[<?php echo $item['product_id'];?>]" type="number" 
+                                                    value="<?php echo $item['quantity']; ?>" />
+                                                </td>
+                                                <td class="product-subtotal"><?php echo $item['price'] * $item['quantity']; ?></td>
+                                                <td class="product-remove"><a href="/?section=cart&remove_product_id=<?php echo $item['product_id']; ?>">X</a></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </form>
+                        <div class="cartbox__btn">
+                            <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                                <li><a href="#">Coupon Code</a></li>
+                                <li><a href="#">Apply Code</a></li>
+                                <li><a href="#" onclick="document.getElementById('update_cart').submit();">Обновить</a></li>
+                                <li><a href="#">Check Out</a></li>
+                            </ul>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-6">
+                        <div class="cartbox__total__area">
+                            <div class="cartbox-total d-flex justify-content-between">
+                                <ul class="cart__total__list">
+                                    <li>Стоимость товаров</li>
+                                    <li>Стоимость доставки</li>
+                                </ul>
+                                <ul class="cart__total__tk">
+                                    <li><?php echo $data['total_price']; ?>&nbsp;₽</li>
+                                    <li>0&nbsp;₽</li>
+                                </ul>
+                            </div>
+                            <div class="cart__total__amount">
+                                <span>Всего к оплате</span>
+                                <span><?php echo $data['total_price']; ?>&nbsp;₽</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <!-- cart-main-area end -->
+        <!-- Start Footer Area -->
+        <?php require_once("footer.phtml"); ?>
+        <!-- End Footer Area -->
+        <!-- Login Form -->
+        <?php require_once("login_wrapper.phtml"); ?>
+        <!-- //Login Form -->
+        <!-- Cartbox -->
+        <?php require_once("cartbox.phtml"); ?>
+        <!-- //Cartbox -->   
+	</div><!-- //Main wrapper -->
+
+	<!-- JS Files -->
+	<?php require_once("bottom.phtml"); ?>
+</body>
+</html>
+<?php var_dump($data['items']); ?>

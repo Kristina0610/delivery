@@ -120,3 +120,55 @@ function getChildCategories($parent_id) {
 	return $children_id;
 }
 
+function getUserCart($user_id) {
+	global $pdo;
+	$stmt = $pdo->prepare("SELECT p.name, p.photo_small, p.price, c.product_id, c.quantity FROM delivery_products p, delivery_cart c WHERE p.id = c.product_id AND c.user_id = ?");
+	$stmt->execute([$user_id]);
+	//var_dump($stmt->fetchAll());
+	$total_price = 0;
+	while ($item = $stmt->fetch()) {
+		$cart[] = $item;
+		$total_price += $item['price']*$item['quantity'];
+	}
+	//var_dump($total_price);
+	return [
+		"items"=>$cart,
+		"total_price"=>$total_price
+	];
+}
+
+function getGuestCart() {
+	global $pdo;
+	$cart = [];
+	$total_price = 0;
+	if (isset($_COOKIE['cart'])) {
+		$to_cart = json_decode($_COOKIE['cart'],true);
+		$product_ids = array_keys($to_cart);
+
+		$questions = mb_substr(str_repeat('?,', count($product_ids)),0,-1);
+		$stmt = $pdo->prepare("SELECT p.id product_id, p.name, p.photo_small, p.price FROM delivery_products p WHERE p.id IN (".$questions.")");
+		$stmt->execute($product_ids);
+		
+		while ($item = $stmt->fetch()) {
+			$item['quantity'] = $to_cart[$item['product_id']];
+			$cart[] = $item;
+			$total_price += $item['price']*$item['quantity'];
+		}	
+	} 
+	return [
+		"items"=>$cart,
+		"total_price"=>$total_price
+	];
+}
+
+function getCookieCart() {
+	return isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'],true) : [];
+}
+
+function setCookieCart($cart) {
+	return setcookie('cart',json_encode($cart),time()+(7*24*60*60),'/');
+}
+
+function clearCookiecart() {
+	return setcookie('cart','',-1,'/');
+}

@@ -33,7 +33,7 @@
 /*============= Youtub Popup ==============*/
 
   $('a.video-play-button').yu2fvl();
-
++
 
 
 /*============= Youtub Popup 02 ==============*/
@@ -374,7 +374,7 @@
 
     $(".qtybutton").on("click", function () {
         var $button = $(this);
-        var oldValue = $button.parent().find("input").val();
+        var oldValue = $button.parent().find("input[name=qtybutton]").val();
         if ($button.text() == "+") {
             var newVal = parseFloat(oldValue) + 1;
         } else {
@@ -385,7 +385,7 @@
                 newVal = 1;
             }
         }
-        $button.parent().find("input").val(newVal);
+        $button.parent().find("input[name=qtybutton]").val(newVal);
     });
 
 

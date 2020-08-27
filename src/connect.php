@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost'; // localhost
 $db   = 'kristiru_general';
-$user = 'kristiru_me';
+$user_db = 'kristiru_me';
 $pass = 'qnfa6dalTUdi';
 $charset = 'utf8';
 
@@ -12,4 +12,4 @@ $opt = [
     PDO::ATTR_EMULATE_PREPARES   => false,
 ];
 
-$pdo = new PDO($dsn, $user, $pass, $opt);
+$pdo = new PDO($dsn, $user_db, $pass, $opt);

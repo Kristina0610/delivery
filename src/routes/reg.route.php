@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 		try {
 			$stmt = $pdo->prepare("INSERT INTO delivery_users(firstname,lastname,phone,password) VALUES (?,?,?,?)");
-			$stmt->execute([$_POST['firstname'],$_POST['secondname'],$_POST['phone'],password_hash($_POST['password'], PASSWORD_DEFAULT)]);
+			$stmt->execute([$_POST['firstname'],$_POST['lastname'],$_POST['phone'],password_hash($_POST['password'], PASSWORD_DEFAULT)]);
 			$stmt_code = $pdo->prepare("INSERT INTO delivery_phone_verification(code,user_id,created_at) VALUES (?,?,NOW())");
 			$stmt_code->execute([$curl->response->code,$pdo->lastInsertId()]);
 			echo json_encode([

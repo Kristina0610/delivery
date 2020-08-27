@@ -72,9 +72,10 @@
                                                 <form id='myform' method='POST' action='#'>
                                                     <div class="product-quantity">
                                                         <div class="cart-plus-minus">
-                                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="02">
+                                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
                                                             <div class="add__to__cart__btn">
-                                                                <a class="food__btn" href="cart.html">В корзину</a>
+                                                                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                                                                <a class="food__btn" href="#">В корзину</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -181,7 +182,8 @@
                                         </ul>
                                         <p><?php echo mb_substr($rp['comment'],0,20)."..."; ?></p>
                                         <div class="beef__cart__btn">
-                                            <a href="cart.html">В корзину</a>
+                                            <input type="hidden" id="product_id" value="<?php echo $product['id']; ?>">
+                                            <a href="#">В корзину</a>
                                         </div>
                                     </div>
                                 </div>
@@ -237,5 +239,6 @@
     
 
 	<?php require_once("bottom.phtml"); ?>
+    <script src="js/add_to_cart.js"></script>
 </body>
 </html>

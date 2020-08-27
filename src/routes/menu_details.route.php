@@ -1,5 +1,5 @@
 <?php 
-
+//dump(json_decode($_COOKIE['cart'],true));
 $stmt = $pdo->prepare("SELECT c.name AS category_name,p.* FROM delivery_categories c,delivery_products p WHERE p.category_id = c.id AND p.id = ?");
 $stmt->execute([$_GET['product_id']]);
 $product = $stmt->fetch();
