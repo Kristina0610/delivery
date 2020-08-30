@@ -541,14 +541,14 @@ stickyHeader();
     function paymentMethodToggle(){
         var paymentMethodList = $('.payment-method-list li');
         var paymentFormToggle = $('.payment-form-toggle');
-        var paymentForm = $('.payment-form');
+        var change_for = $('.change_for');
         paymentMethodList.on('click', function(){
             paymentMethodList.removeClass('active');
             $(this).addClass('active');
             if( $(this).hasClass('payment-form-toggle') ) {
-                paymentForm.slideDown()
+                change_for.slideDown()
             } else {
-                paymentForm.slideUp()
+                change_for.slideUp()
             }
         });
     }

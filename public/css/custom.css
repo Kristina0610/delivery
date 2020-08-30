@@ -10,3 +10,7 @@
 	Note: This is main css. All plugins css files import here.
 
 **********************************************************************************/
+
+.change_for {
+	display: none;
+}

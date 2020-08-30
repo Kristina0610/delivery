@@ -1,5 +1,6 @@
 <?php 
-$stmt = $pdo->prepare("SELECT * FROM delivery_categories WHERE id = ?");
+//БЛОК ФОРМИРОВАНИЯ МЕНЮ начало
+$stmt = $pdo->prepare("SELECT * FROM delivery_categories WHERE id = ?");  
 $stmt->execute([$_GET['category_id'] ?? NULL]);
 $current_category = $stmt->fetch();
 
@@ -7,7 +8,7 @@ $stmt = $pdo->prepare("SELECT * FROM delivery_categories WHERE parent_id IS NULL
 $stmt->execute();
 $categories = $stmt->fetchAll();
 
-
+//БЛОК ФОРМИРОВАНИЯ МЕНЮ конец
 
 for ($i=0; $i < count($categories); $i++) { 
 	$stmt = $pdo->prepare("SELECT * FROM delivery_categories WHERE parent_id = ?");
@@ -34,8 +35,9 @@ if (isset($_GET['category_id'])) {
 		$where .= " AND category_id = :category_id";// :category_id - именнованный placeholder
 		$bind_where['category_id'] = $_GET['category_id'];
 	} else {
-		$where .= " AND category_id IN (SELECT id FROM delivery_categories WHERE parent_id = :parent_id)";
+		$where .= " AND category_id IN (SELECT id FROM delivery_categories WHERE parent_id = :parent_id OR id = :self_category_id)";
 		$bind_where['parent_id'] = $_GET['category_id'];
+		$bind_where['self_category_id'] = $_GET['category_id'];
 	}
 }
 
@@ -83,6 +85,7 @@ foreach ($bind_inner as $key => $value) {
 $stmt->execute();
 
 $products = $stmt->fetchAll();
+
 //var_dump($products);
 
 /*$stmt = $pdo->prepare("SELECT * FROM tags WHERE 1= 1");

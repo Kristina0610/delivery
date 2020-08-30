@@ -34,13 +34,22 @@
             </div>
         </div>
         <!-- End Bradcaump area --> 
+
         <!-- cart-main-area start -->
         <div class="cart-main-area section-padding--lg bg--white">
             <div class="container">
+                <div class="row mb-5">
+                <div class="col-md-12 col-sm-12 ol-lg-12">
+                    <div style="color: red; width: 100%; text-align: center;">
+                        <?php echo @$errors['quantity']; ?>
+                    </div>
+                </div> 
+                </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 ol-lg-12">
                         <form id="update_cart" method="POST" action="/?section=cart">           
                             <div class="table-content table-responsive">
+                                
                                 <table>
                                     <thead>
                                         <tr class="title-top">
@@ -63,7 +72,7 @@
                                                 <td class="product-name"><a href="#"><?php echo $item['name']; ?></a></td>
                                                 <td class="product-price"><span class="amount"><?php echo $item['price']; ?></span></td>
                                                 <td class="product-quantity">
-                                                    <input name="cart[<?php echo $item['product_id'];?>]" type="number" 
+                                                    <input min="1" name="cart[<?php echo $item['product_id'];?>]" type="number" 
                                                     value="<?php echo $item['quantity']; ?>" />
                                                 </td>
                                                 <td class="product-subtotal"><?php echo $item['price'] * $item['quantity']; ?></td>
@@ -79,7 +88,7 @@
                                 <li><a href="#">Coupon Code</a></li>
                                 <li><a href="#">Apply Code</a></li>
                                 <li><a href="#" onclick="document.getElementById('update_cart').submit();">Обновить</a></li>
-                                <li><a href="#">Check Out</a></li>
+                                <li><a href="/?section=checkout">Оформление заказа</a></li>
                             </ul>
                         </div> 
                     </div>
