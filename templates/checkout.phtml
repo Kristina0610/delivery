@@ -39,51 +39,51 @@
             <div class="checkout-section">
                 <div class="container">
                     <div class="row">
-                       
+                          
                         <div class="col-lg-6 col-12 mb-30">
-                               
-                                <!-- Checkout Accordion Start -->
+                            <form action="" method="POST" class="billing-form checkout-form">    
+                                    <!-- Checkout Accordion Start -->
                                 <div id="checkout-accordion"> 
                                     <!-- Billing Method -->
+                                    
                                     <div class="single-accordion">
                                         <a class="accordion-head collapsed" data-toggle="collapse" data-parent="#checkout-accordion" href="#billing-method">1. Платежная информация</a>
                                         <div id="billing-method" class="collapse show">
 
                                             <div class="accordion-body billing-method fix">
-
-                                                <form action="#" class="billing-form checkout-form">
-                                                    <div class="row">
-                                                        <div class="col-md-6 col-12 mb--20">                                 
-                                                            <input type="text" placeholder="Как Вас зовут *">
-                                                        </div>
-                                                        <div class="col-md-6 col-12">                                   
-                                                            <input placeholder="Номер телефона *" type="text">
-                                                        </div> 
-                                                        <div class="col-12 mb--20">
-                                                            <select>
-                                                              <option value="1">Ваш город *</option>
-                                                              <option value="2">Севастополь</option>
-                                                              <option value="3">Симферополь</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-12 mb--20">
-                                                            <input placeholder="Улица/Проспект *" type="text">
-                                                        </div>
-                                                        <div class="col-md-4 mb--20">
-                                                            <input placeholder="Дом *" type="text">
-                                                        </div>
-                                                        <div class="col-md-4 mb--20">
-                                                            <input placeholder="Квартира" type="text">
-                                                        </div>
-                                                        <div class="col-md-4 col-12 mb--20">                                 
-                                                            <input placeholder="Домофон" type="text">
-                                                        </div>  
-                                                        <div style="color: red">
-                                                            Поля со звездочкой * ОБЯЗАТЕЛЬНЫ к заполнению
-                                                        </div>                                
+                                                <div class="row">
+                                                    <div class="col-md-6 col-12 mb--20">                                 
+                                                        <input type="text" name="client_name" value="<?php echo @$_POST['client_name'];?>" placeholder="Как Вас зовут *">
+                                                        <?php if (isset($errors['client_name'])) : ?>
+                                                            <label id="client_name-error" class="error" for="client_name"><?php echo $errors['client_name']; ?></label>
+                                                        <?php endif; ?>
                                                     </div>
-                                                </form>
-                                                
+                                                    <div class="col-md-6 col-12">                                   
+                                                        <input type="text" name="client_phone" value="<?php echo @$_POST['client_phone'];?>" placeholder="Номер телефона *">
+                                                    </div> 
+                                                    <div class="col-12 mb--20">
+                                                        <select name="addr_city">
+                                                          <option value="0" selected disabled>Ваш город *</option>
+                                                          <option value="Севастополь">Севастополь</option>
+                                                          <option value="Симферополь">Симферополь</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-12 mb--20">
+                                                        <input type="text" name="addr_street" value="<?php echo @$_POST['addr_street']; ?>" placeholder="Улица/Проспект *">
+                                                    </div>
+                                                    <div class="col-md-4 mb--20">
+                                                        <input type="text" name="addr_build" value="<?php echo @$_POST['addr_build']; ?>" placeholder="Дом *" >
+                                                    </div>
+                                                    <div class="col-md-4 mb--20">
+                                                        <input type="text" name="addr_flat" value="<?php echo @$_POST['addr_flat']; ?>" placeholder="Квартира">
+                                                    </div>
+                                                    <div class="col-md-4 col-12 mb--20">                                 
+                                                        <input type="text" name="addr_domophone_code" value="<?php echo @$_POST['addr_domophone_code']; ?>" placeholder="Домофон">
+                                                    </div>  
+                                                    <div style="color: red">
+                                                        Поля со звездочкой * ОБЯЗАТЕЛЬНЫ к заполнению
+                                                    </div>                                
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -143,32 +143,30 @@
                                     </div>
                                     
                                 </div><!-- Checkout Accordion Start -->
-                            </div>
-                            
-                            <!-- Order Details -->
-                            <div class="col-lg-6 col-12 mb-30">
-                               
-                                <div class="order-details-wrapper">
-                                    <h2>Ваш заказ</h2>
-                                    <div class="order-details">
-                                        <form action="#">
-                                            <ul>
-                                                <li><p class="strong">Продукт</p><p class="strong">Цена</p></li>
-                                                <li><p>Fishing Reel x1</p><p>$104.99</p></li>
-                                                <li><p>Fishing Rods x1 </p><p>$85.99</p></li>
-                                                <li><p class="strong">ПРОМЕЖУТОЧНЫЙ ИТОГ КОРЗИНЫ</p><p class="strong">$190.98</p></li>
-                                                <li><p class="strong">доставка</p><p>
-                                                    <input type="radio" name="order-shipping" id="flat" /><label for="flat">Flat Rate $ 7.00</label><br />
-                                                    <input type="radio" name="order-shipping" id="free" /><label for="free">        БЕСПЛАТНО</label>
-                                                </p></li>
-                                                <li><p class="strong">ВСЕГО К ОПЛАТЕ</p><p class="strong">$190.98</p></li>
-                                                <li><button class="food__btn">ОФОРМИТЬ ЗАКАЗ</button></li>
-                                            </ul>
-                                        </form>
-                                    </div>
-                                </div>
+                        </div>
                                 
+                                <!-- Order Details -->
+                        <div class="col-lg-6 col-12 mb-30">
+                           
+                            <div class="order-details-wrapper">
+                                <h2>Ваш заказ</h2>
+                                <div class="order-details">
+                                        <ul>
+                                            <li><p class="strong">Продукт</p><p class="strong">Цена</p></li>
+                                            <li><p>Fishing Reel x1</p><p>$104.99</p></li>
+                                            <li><p>Fishing Rods x1 </p><p>$85.99</p></li>
+                                            <li><p class="strong">ПРОМЕЖУТОЧНЫЙ ИТОГ КОРЗИНЫ</p><p class="strong">$190.98</p></li>
+                                            <li><p class="strong">доставка</p><p>
+                                                <input type="radio" name="order-shipping" id="flat" /><label for="flat">Flat Rate $ 7.00</label><br />
+                                                <input type="radio" name="order-shipping" id="free" /><label for="free">        БЕСПЛАТНО</label>
+                                            </p></li>
+                                            <li><p class="strong">ВСЕГО К ОПЛАТЕ</p><p class="strong">$190.98</p></li>
+                                            <li><button class="food__btn" name ="submit" type="submit">ОФОРМИТЬ ЗАКАЗ</button></li>
+                                        </ul>
+                                </div>
                             </div>
+                        </form>       
+                        </div>
                         
                     </div>
                 </div>

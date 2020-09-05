@@ -8859,3 +8859,10 @@ input[type="submit"] {
   font-size: 16px;
   color: green;
 }
+
+form label.error {
+  line-height: 16px;
+  margin: 5px 0 -5px;
+  display: block;
+  clear: both;
+}
