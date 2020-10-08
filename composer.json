@@ -1,0 +1,9 @@
+{
+    "require": {
+        "nesbot/carbon": "^2.40",
+        "php-curl-class/php-curl-class": "^8.8"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.1"
+    }
+}

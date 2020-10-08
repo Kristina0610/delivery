@@ -36,6 +36,11 @@ function cart_box_render() {        //событие полной загрузк
 			$(".cartbox__items").append(item);
 		});
 		//console.log(r.data.total_price);
+		if (r.data.total_price > 0) {
+			$(".cartbox__buttons").show();
+		} else {
+			$(".cartbox__buttons").hide();
+		}
 		$(".shopping__cart > .shop__qun > span").html(r.data.items.length);
 		$(".grandtotal > .price").html(r.data.total_price + " руб.");
 	})

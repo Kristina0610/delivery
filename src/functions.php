@@ -169,6 +169,13 @@ function setCookieCart($cart) {
 	return setcookie('cart',json_encode($cart),time()+(7*24*60*60),'/');
 }
 
-function clearCookiecart() {
+function clearCookieCart() {
 	return setcookie('cart','',-1,'/');
+}
+function clearDbCart($user_id) {
+	global $pdo;
+	$stmt = $pdo->prepare("DELETE FROM delivery_cart WHERE user_id = ?");
+	$stmt->execute([$user_id]);
+
+	return (boolean) $stmt->rowCount();	//данная конструкция возвращает true/false
 }

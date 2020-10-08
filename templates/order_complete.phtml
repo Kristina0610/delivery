@@ -1,0 +1,51 @@
+<?php  require_once("top.phtml"); ?>
+</head>
+<body>
+	<div class="wrapper" id="wrapper">
+		 <!-- Start Header Area -->
+        <?php require_once("header.phtml"); ?>
+        <!-- End Header Area -->
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area bg-image--18">
+            <div class="ht__bradcaump__wrap d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/?section=index">Главня</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="htc__checkout bg--white section-padding--lg">
+            <!-- Checkout Section Start-->
+            <div class="checkout-section">
+                <div class="container">
+                    <div class="row">
+                      ПОЗДРАВЛЯЕМ! Ваш заказ номер&nbsp;<strong><?php echo $_GET['order_id']+100;?></strong>&nbsp;успешно оформлен!
+                        
+                    </div>
+                </div>
+            </div><!-- Checkout Section End-->             
+         </section>   
+        <!-- End Bradcaump area --> 
+        <!-- Start Footer Area -->
+        <?php require_once("footer.phtml"); ?>
+        <!-- End Footer Area -->
+        <!-- Login Form -->
+        <?php require_once("login_wrapper.phtml"); ?>
+        <!-- //Login Form -->
+            <!-- Cartbox -->
+        <?php require_once("cartbox.phtml"); ?>
+        <!-- //Cartbox -->  
+    </div><!-- //Main wrapper -->
+
+    <!-- JS Files -->
+    <?php require_once("bottom.phtml"); ?>
+
+</body>
+</html>

@@ -60,19 +60,38 @@
                                                     </div>
                                                     <div class="col-md-6 col-12">                                   
                                                         <input type="text" name="client_phone" value="<?php echo @$_POST['client_phone'];?>" placeholder="Номер телефона *">
+                                                        <?php if(isset($errors['client_phone'])) : ?>
+                                                            <label id="client_phone-error" class="error" for="client_phone">
+                                                            <?php echo $errors['client_phone']; ?></label>
+                                                        <?php endif; ?>
                                                     </div> 
                                                     <div class="col-12 mb--20">
                                                         <select name="addr_city">
-                                                          <option value="0" selected disabled>Ваш город *</option>
-                                                          <option value="Севастополь">Севастополь</option>
-                                                          <option value="Симферополь">Симферополь</option>
+                                                          <!--<option value="0" selected disabled>Ваш город *</option>
+                                                          <option value="<?php echo @$_POST['addr_city'];?>">Севастополь</option>
+                                                          <option value="Симферополь">Симферополь</option>-->
+                                                          <option selected disabled>Ваш город *</option>
+                                                          <?php foreach ($addr_city as $value):?>
+                                                            <?php $selected = @$_POST['addr_city'] == $value ? 'selected' : ''; ?>
+                                                            <option <?php echo $selected;?> value="<?php echo $value;?>"><?php echo $value; ?></option>
+                                                          <?php endforeach; ?>
                                                         </select>
+                                                        <?php if (isset($errors['addr_city'])) : ?>
+                                                            <label id="addr_city-error" class="error" for="addr_city">
+                                                            <?php echo $errors['addr_city']; ?></label>
+                                                        <?php endif; ?>
                                                     </div>
                                                     <div class="col-12 mb--20">
                                                         <input type="text" name="addr_street" value="<?php echo @$_POST['addr_street']; ?>" placeholder="Улица/Проспект *">
+                                                        <?php if (isset($errors['addr_street'])) : ?>
+                                                            <label id="addr_street-error" class="error" for="addr_street"><?php echo $errors['addr_street']; ?></label>
+                                                        <?php endif; ?>
                                                     </div>
                                                     <div class="col-md-4 mb--20">
                                                         <input type="text" name="addr_build" value="<?php echo @$_POST['addr_build']; ?>" placeholder="Дом *" >
+                                                        <?php if (isset($errors['addr_build'])) : ?>
+                                                            <label id="addr_build-error" class="error" for="addr_build"><?php echo $errors['addr_build']; ?></label>
+                                                        <?php endif; ?>
                                                     </div>
                                                     <div class="col-md-4 mb--20">
                                                         <input type="text" name="addr_flat" value="<?php echo @$_POST['addr_flat']; ?>" placeholder="Квартира">
@@ -91,33 +110,46 @@
                                     <!-- Shipping Method -->
                                     <div class="single-accordion">
                                         <a class="accordion-head collapsed" data-toggle="collapse" data-parent="#checkout-accordion" href="#shipping-method">2. Информация о заказе</a>
-                                        <div id="shipping-method" class="collapse">
+                                        <div id="shipping-method" class="collapse show">
                                             <div class="accordion-body shipping-method fix">
                                                 <div class="col-12 col-12 mb--20">                                 
                                                   <label for="in_time">
                                                         К какому времени доставить заказ?
                                                   </label><br>
                                                   <select name="in_time" id="in_time">
-                                                      
+                                                    <option disabled selected>Выберите время из списка</option>
+                                                    <?php foreach ($arr_time as $value):?>
+                                                        <?php $selected = @$_POST['in_time'] == $value ? 'selected' : ""; ?>
+                                                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">К <?php echo $value; ?></option>
+                                                    <?php endforeach; ?>
+                                                       <option>Нет указанного времени, уточнить у оператора</option>
                                                   </select>
                                                 </div>
                                                 <div class="col-12 col-12 mb--20"> 
                                                    <label for="person_count">
                                                         Количество персон
                                                    </label><br>
-                                                    <input name="person_count" id="person_count" type="number" min="1" max="30" value="1">
+                                                    <input name="person_count" id="person_count" type="number" min="1" max="30" value="<?php echo @$_POST['person_count'];?>">
+                                                    <?php if (isset($errors['person_count'])): ?>
+                                                        <label id="person_count-error" class="error" for="person_count"><?php echo $errors['person_count']; ?></label>
+                                                    <?php endif; ?>
                                                 </div>
                                                 <div class="col-12 col-12 mb--20"> 
                                                     <label for="training_chopsticks">
                                                         Количество учебных палочек
                                                     </label><br>
-                                                    <input name="training_chopsticks" id="training_chopsticks" type="number" min="0" max="30" value="0">  
+                                                    <input name="training_chopsticks" id="training_chopsticks" type="number" min="0" max="30" value="<?php echo @$_POST['training_chopsticks'];?>"> 
+                                                    <?php if (isset($errors['training_chopsticks'])): ?>
+                                                        <label id="training_chopsticks-error" class="error" for="training_chopsticks">
+                                                            <?php echo $errors['training_chopsticks']; ?>
+                                                        </label>
+                                                    <?php endif; ?>
                                                 </div> 
                                                 <div class="col-12 col-12 mb--20"> 
                                                     <label for="comment">
                                                       Комментарий к заказу
                                                     </label><br>
-                                                    <textarea name="comment" id="comment" cols="60" rows="3"></textarea>
+                                                    <textarea name="comment" id="comment" cols="60" rows="3" ><?php echo @$_POST['comment'];?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,18 +158,39 @@
                                     <!-- Payment Method -->
                                     <div class="single-accordion">
                                         <a class="accordion-head collapsed" data-toggle="collapse" data-parent="#checkout-accordion" href="#payment-method">3. Способ оплаты</a>
-                                        <div id="payment-method" class="collapse">
+                                        <div id="payment-method" class="collapse show">
                                             <div class="accordion-body payment-method fix">
+                                                
+                                                    <?php foreach ($payment_type as $key => $value):?>
+                                                     <div class="form-check">
+                                                        <input class="form-check-input" type="radio" id="<?php echo $key;?>" name="payment_type" value="<?php echo @$_POST['payment_type'];?>">
+                                                        <label class="form-check-label" for="<?php echo $key;?>"><?php echo $value; ?></label>
+                                                   </div>
+                                                    <?php endforeach; ?>
+                                                    <div class="change_for">
+                                                        <label for="change_for">Сдача с</label>
+                                                        <input name="change_for" id="change_for" type="text" value="<?php echo @$_POST['change_for']; ?>" placeholder="1000 руб.">
+                                                        <?php if (isset($errors['change_for'])):?>
+                                                            <label id="change_for-error" class="error" for="change_for">
+                                                                <?php echo $errors['change_for']; ?>
+                                                            </label>
+                                                        <?php endif; ?>
+                                                    </div>
                                                
-                                                <ul class="payment-method-list">
-                                                    <li class="active">Он-лайн</li>
-                                                    <li>Картой при получении</li>
-                                                    <li class="payment-form-toggle">Оплата наличными</li>
-                                                </ul>
-                                                <div class="change_for">
+                                              <!--  <ul class="payment-method-list" name="payment_type">
+                                                    <li class="active" value="<?php echo @$_POST['payment_type'];?>"><?php echo $payment_type[0];?></li>
+                                                    <li><?php echo $payment_type[1]; ?></li>
+                                                    <li class="payment-form-toggle" value="<?php echo @$_POST['payment_type'];?>"><?php echo $payment_type[2]; ?></li>
+                                                </ul>-->
+                                                <!--<div class="change_for">
                                                     <label for="change_for">Сдача с</label>
-                                                    <input name="change_for" id="change_for" type="text" placeholder="1000 руб.">
-                                                </div>
+                                                    <input name="change_for" id="change_for" type="text" value="<?php echo @$_POST['change_for']; ?>" placeholder="1000 руб.">
+                                                    <?php if (isset($errors['change_for'])):?>
+                                                        <label id="change_for-error" class="error" for="change_for">
+                                                            <?php echo $errors['change_for']; ?>
+                                                        </label>
+                                                    <?php endif; ?>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -152,15 +205,34 @@
                                 <h2>Ваш заказ</h2>
                                 <div class="order-details">
                                         <ul>
-                                            <li><p class="strong">Продукт</p><p class="strong">Цена</p></li>
-                                            <li><p>Fishing Reel x1</p><p>$104.99</p></li>
-                                            <li><p>Fishing Rods x1 </p><p>$85.99</p></li>
-                                            <li><p class="strong">ПРОМЕЖУТОЧНЫЙ ИТОГ КОРЗИНЫ</p><p class="strong">$190.98</p></li>
-                                            <li><p class="strong">доставка</p><p>
-                                                <input type="radio" name="order-shipping" id="flat" /><label for="flat">Flat Rate $ 7.00</label><br />
-                                                <input type="radio" name="order-shipping" id="free" /><label for="free">        БЕСПЛАТНО</label>
-                                            </p></li>
-                                            <li><p class="strong">ВСЕГО К ОПЛАТЕ</p><p class="strong">$190.98</p></li>
+                                            <li>
+                                                <p class="strong">Продукт</p>
+                                                <p class="strong">Цена</p>
+                                            </li>
+                                            <?php foreach ($data['items'] as $product_cart):?>
+                                            <li>
+                                                <p>
+                                                    <?php echo $product_cart['name']; ?> X <?php echo $product_cart['quantity'];?>шт.
+                                                </p>
+                                                <p><?php echo $product_cart['price']; ?>&nbsp;&#8381;</p>
+                                            </li>
+                                            <?php endforeach; ?>
+                                            <li>
+                                                <p class="strong">ПРОМЕЖУТОЧНЫЙ ИТОГ КОРЗИНЫ</p>
+                                                <p class="strong"><?php echo $data['total_price']; ?>&nbsp;&#8381;</p>
+                                            </li>
+                                            <li><p class="strong">доставка</p>
+                                                <?php if ($data['total_price'] < 500):?>
+                                                <p><?php echo $delivery_cost; ?>&nbsp;&#8381;</p>
+                                            </li>
+                                            <li>  
+                                                <p class="strong">ВСЕГО К ОПЛАТЕ</p>
+                                                <p class="strong"><?php echo $data['total_price']+$delivery_cost; ?>&nbsp;&#8381;</p>
+                                                <?php   else : ?>
+                                                <label for="free">БЕСПЛАТНО</label>
+                                            </li>
+                                            <li><p class="strong">ВСЕГО К ОПЛАТЕ</p><p class="strong"><?php echo $data['total_price']; ?>&nbsp;&#8381;</p></li>
+                                            <?php endif; ?>
                                             <li><button class="food__btn" name ="submit" type="submit">ОФОРМИТЬ ЗАКАЗ</button></li>
                                         </ul>
                                 </div>
@@ -185,5 +257,6 @@
 
     <!-- JS Files -->
     <?php require_once("bottom.phtml"); ?>
+
 </body>
 </html>

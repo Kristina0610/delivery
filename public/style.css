@@ -8215,7 +8215,6 @@ input[type="submit"] {
     width: 100%;
     border: 1px solid #ededed;
     background-color: #ffffff;
-    height: 40px;
     line-height: 24px;
     padding: 7px 15px;
     color: #959595;
@@ -8865,4 +8864,5 @@ form label.error {
   margin: 5px 0 -5px;
   display: block;
   clear: both;
+  color: red;
 }
