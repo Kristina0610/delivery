@@ -1507,7 +1507,7 @@ a#scrollUp {
     left: auto;
     right: 0; }
   .section__title.section__bg__black .title__line {
-    color: #ffffff; }
+    color: black; }
   .section__title.section__bg__black p {
     color: #ffffff; }
   .section__title.section__bg__black::before {
