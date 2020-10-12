@@ -177,13 +177,13 @@
                                     <div class="beef__details">
                                         <h4><a href="?section=menu_details&product_id=<?php echo $rp['id']; ?>"><?php echo $rp['name']; ?></a></h4>
                                         <ul class="beef__prize">
-                                            <li class="old__prize"><?php echo round($product['price']*1.2)-1; ?>&nbsp;&#8381;</li>
-                                            <li><?php echo $product['price']; ?>&nbsp;&#8381;</li>
+                                            <li class="old__prize"><?php echo round($rp['price']*1.2)-1; ?>&nbsp;&#8381;</li>
+                                            <li><?php echo $rp['price']; ?>&nbsp;&#8381;</li>
                                         </ul>
                                         <p><?php echo mb_substr($rp['comment'],0,20)."..."; ?></p>
                                         <div class="beef__cart__btn">
-                                            <input type="hidden" id="product_id" value="<?php echo $product['id']; ?>">
-                                            <a href="#">В корзину</a>
+                                            <input type="hidden" name="product_id" value="<?php echo $rp['id']; ?>">
+                                            <a class="food__btn" href="#">В корзину</a>
                                         </div>
                                     </div>
                                 </div>

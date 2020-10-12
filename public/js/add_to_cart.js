@@ -1,4 +1,5 @@
-$(".add__to__cart__btn a").click(function(e) {
+
+$(".add__to__cart__btn a,.beef__cart__btn a").click(function(e) {
 	e.preventDefault();
 	//console.log($(this).parent().children("[name=product_id]").val());
     var product_id = $(this).parent().children("[name=product_id]").val();
@@ -14,7 +15,7 @@ $(".add__to__cart__btn a").click(function(e) {
     }).done(function(r){ //обработчик окончания операции
         //console.log(r);
         if (r.data !== undefined) {
-            console.log("success");
+            toastr.success('Это окно закроется автоматически','Товар добавлен в корзину');
             cart_box_render();
         } else if (r.errors !== undefined) {
             let error_str = "<ul>"

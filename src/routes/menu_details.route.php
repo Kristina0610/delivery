@@ -31,6 +31,7 @@ $arr_new = implode(', ', $arr);
 
 $related_products = getRelatedProducts($_GET['product_id']);
 
+//dump($related_products);
 
 include ("../src/widgets/recent_post.widget.php");
 include ("../templates/menu_details.phtml");
