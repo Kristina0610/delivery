@@ -11,6 +11,7 @@ return array(
     'Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
     'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
+    'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
     'Curl\\' => array($vendorDir . '/php-curl-class/php-curl-class/src/Curl'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
 );

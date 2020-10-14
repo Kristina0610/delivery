@@ -21,6 +21,10 @@ class ComposerStaticInit011e24984110e8a1d215e622b382d2e8
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Translation\\' => 30,
         ),
+        'F' => 
+        array (
+            'Faker\\' => 6,
+        ),
         'C' => 
         array (
             'Curl\\' => 5,
@@ -48,6 +52,10 @@ class ComposerStaticInit011e24984110e8a1d215e622b382d2e8
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
         'Curl\\' => 
         array (
