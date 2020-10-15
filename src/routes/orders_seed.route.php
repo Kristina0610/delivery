@@ -4,8 +4,11 @@ include("../src/connect.php");
 $faker = Faker\Factory::create('ru_RU');
 
 if (@$_POST['submit']) {
+	$stmt = $pdo->prepare("SELECT id,price FROM delivery_products");
+	$stmt->execute();
+	$product_ids = array_column($stmt->fetchAll(), 'price','id');
+	//dump($product_ids);
 	for ($i=0; $i < 200 ; $i++) { 
-		$id = $faker->unique->numberBetween($min = 1, $max = 300);
 		$addr_city = $faker->randomElement($array = ['Симферополь','Севастополь']);
 		$addr_street = $faker->streetName;
 		$addr_build = $faker->buildingNumber;
@@ -16,7 +19,7 @@ if (@$_POST['submit']) {
 		$in_time = $faker->time($format = 'H:i:s', $max = 'now');
 		$person_count=$faker->numberBetween($min = 1, $max = 30);
 		$training_chopsticks = $faker->numberBetween($min = 0, $max = $person_count);
-		$created_at = $faker->time($format = 'H:i:s', $max = 'now');
+		$created_at = $faker->dateTimeThisMonth($max = 'now', $timezone = null);
 		//$created_at = $in_time->sub(DateInterval::createFromDateString('60 minute'));
 		$status = 'new';
 		$rejected_reason = NULL;
@@ -24,10 +27,8 @@ if (@$_POST['submit']) {
 		$change_for = NULL;
 		$payment_status = $faker->randomElement($array = ['paid','none']);
 		$payment_type = $faker->randomElement($array = ['online','card']);
-		
-		$arr[] = ['id'=>$id];
+
 		$stmt = $pdo->prepare("INSERT INTO delivery_orders(
-			id,
 			addr_city,
 			addr_street,
 			addr_build,
@@ -45,25 +46,23 @@ if (@$_POST['submit']) {
 			change_for,
 			payment_status,
 			payment_type
-		) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-		$stmt->execute([$id,$addr_city,$addr_street,$addr_build,$addr_flat,$addr_domophone_code,$client_phone,
-			$client_name,$in_time,$person_count,$training_chopsticks,$created_at,$status,$rejected_reason,
+		) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt->execute([$addr_city,$addr_street,$addr_build,$addr_flat,$addr_domophone_code,$client_phone,
+			$client_name,$in_time,$person_count,$training_chopsticks,$created_at->format("Y:m:d H:i:s"),$status,$rejected_reason,
 			$comment,$change_for,$payment_status,$payment_type]);
-	}
-	foreach ($arr as $key) {
-			$order_id = $key['id'];
-			//dump($test_id);
-			$product_id = $faker->numberBetween($min = 1, $max = 49);
-			$quantity = $faker->numberBetween($min = 1, $max = 5);
-
-			$stmt_price = $pdo->prepare("SELECT price FROM delivery_products WHERE id = ?");
-			$stmt_price->execute([$product_id]);
-			$price = $stmt_price->fetchColumn();
-			dump($price);
+		$order_id = $pdo->lastInsertId();
+		$order_product_ids = $faker->randomElements(array_keys($product_ids), $faker->numberBetween(1,5));
+		//dump($order_product_ids);
+		foreach ($order_product_ids as $product_id) {
+			$quantity = $faker->numberBetween(1,5);
+			$price = $product_ids[$product_id];
+			//dump($price);
 			$stmt = $pdo->prepare("INSERT INTO delivery_order_product(order_id,product_id,quantity,price) VALUES (?,?,?,?)");
 			$stmt->execute([$order_id,$product_id,$quantity,$price]);
-		}	
-	//dump($arr);
+			/*dump($product_ids[$product_id]);
+			break;*/
+		} 
+	}
 }
 
 /*if (@$_POST['submit']) {
