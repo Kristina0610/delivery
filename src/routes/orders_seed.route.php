@@ -7,7 +7,13 @@ if (@$_POST['submit']) {
 	$stmt = $pdo->prepare("SELECT id,price FROM delivery_products");
 	$stmt->execute();
 	$product_ids = array_column($stmt->fetchAll(), 'price','id');
-	//dump($product_ids);
+
+	$stmt_users = $pdo->prepare("SELECT id FROM delivery_users");
+	$stmt_users->execute();
+	$user_ids = array_column($stmt_users->fetchAll(), 'id');
+	//dump($user_ids);
+	
+	//dump($user_id);
 	for ($i=0; $i < 200 ; $i++) { 
 		$addr_city = $faker->randomElement($array = ['Симферополь','Севастополь']);
 		$addr_street = $faker->streetName;
@@ -27,6 +33,7 @@ if (@$_POST['submit']) {
 		$change_for = NULL;
 		$payment_status = $faker->randomElement($array = ['paid','none']);
 		$payment_type = $faker->randomElement($array = ['online','card']);
+		$user_id = $faker->randomElement([NULL,$faker->randomElement($user_ids)]);
 
 		$stmt = $pdo->prepare("INSERT INTO delivery_orders(
 			addr_city,
@@ -45,11 +52,12 @@ if (@$_POST['submit']) {
 			comment,
 			change_for,
 			payment_status,
-			payment_type
-		) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			payment_type,
+			user_id
+		) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		$stmt->execute([$addr_city,$addr_street,$addr_build,$addr_flat,$addr_domophone_code,$client_phone,
 			$client_name,$in_time,$person_count,$training_chopsticks,$created_at->format("Y:m:d H:i:s"),$status,$rejected_reason,
-			$comment,$change_for,$payment_status,$payment_type]);
+			$comment,$change_for,$payment_status,$payment_type,$user_id]);
 		$order_id = $pdo->lastInsertId();
 		$order_product_ids = $faker->randomElements(array_keys($product_ids), $faker->numberBetween(1,5));
 		//dump($order_product_ids);
@@ -59,8 +67,7 @@ if (@$_POST['submit']) {
 			//dump($price);
 			$stmt = $pdo->prepare("INSERT INTO delivery_order_product(order_id,product_id,quantity,price) VALUES (?,?,?,?)");
 			$stmt->execute([$order_id,$product_id,$quantity,$price]);
-			/*dump($product_ids[$product_id]);
-			break;*/
+			
 		} 
 	}
 }

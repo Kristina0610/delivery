@@ -123,7 +123,7 @@ if (isset($_POST['submit'])) {
 		$_POST['change_for'] = !empty($_POST['change_for']) ? $_POST['change_for'] : null;
 		$pdo->beginTransaction();
 		try {
-			$stmt = $pdo->prepare("INSERT INTO delivery_orders(addr_city,addr_street,addr_build,addr_flat,addr_domophone_code,client_phone,client_name,in_time,person_count,training_chopsticks,created_at,comment,change_for,payment_type) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			$stmt = $pdo->prepare("INSERT INTO delivery_orders(addr_city,addr_street,addr_build,addr_flat,addr_domophone_code,client_phone,client_name,in_time,person_count,training_chopsticks,created_at,comment,change_for,payment_type,user_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			$stmt->execute([$_POST['addr_city'],
 				$_POST['addr_street'],
 				$_POST['addr_build'],
@@ -137,7 +137,10 @@ if (isset($_POST['submit'])) {
 				Carbon::now()->toDateTimeString(),
 				$_POST['comment'],
 				$_POST['change_for'],
-				$_POST['payment_type']]);
+				$_POST['payment_type'],
+				$user ?? $user['id']   //Если пользователь, то ставим id, если нет, то - NULL
+			]);
+
 
 			$order_id = $pdo->lastInsertId();
 			//var_dump($last_id);
