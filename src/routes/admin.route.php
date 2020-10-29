@@ -47,4 +47,10 @@ $all_users = $count_user+$count_guest;
 $persent_guest = round($count_guest*100/$all_users);
 $persent_users = 100 - $persent_guest;
 
+$stmt_count_orders_status= $pdo->prepare("SELECT COUNT(*) FROM delivery_orders WHERE status = 'new'");
+$stmt_count_orders_status->execute();
+$count_orders_status = $stmt_count_orders_status->fetchColumn();
+
+
+
 include ("../templates/admin/index.phtml");

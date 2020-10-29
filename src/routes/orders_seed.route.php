@@ -27,7 +27,7 @@ if (@$_POST['submit']) {
 		$training_chopsticks = $faker->numberBetween($min = 0, $max = $person_count);
 		$created_at = $faker->dateTimeThisMonth($max = 'now', $timezone = null);
 		//$created_at = $in_time->sub(DateInterval::createFromDateString('60 minute'));
-		$status = 'new';
+		$status = $faker->randomElement($array = ['new','processed','ready','sent','completed','rejected']);
 		$rejected_reason = NULL;
 		$comment = $faker->text($maxNbChars = 70);
 		$change_for = NULL;
