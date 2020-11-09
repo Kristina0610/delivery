@@ -57,4 +57,6 @@ $categories = $stmt->fetchAll();
 
 $categories = array_combine(array_column($categories, 'id'), $categories);
 
+
+
 include ("../templates/admin/admin_categories.phtml");

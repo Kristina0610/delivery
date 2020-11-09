@@ -27,233 +27,85 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Форма добавления товаров в меню</h1>
 
+          <form>
+            <div class="row">
+              <div class="col-lg-6">
+
+                <div class="form-group"><label for="product_name">Название товара</label><input type="text" class="form-control form-control-solid" id="product_name" name="product_name" rows="1"></input></div>
+
+                <div class="form-group"><label for="comment">Описание товара</label><textarea class="form-control form-control-solid" id="comment" name="comment" rows="3"></textarea></div>
+                
+                <div class="form-group"><label for="ingredient">Ингредиенты</label><input type="text" class="form-control form-control-solid" id="ingredient" name="ingredient" rows="1"></input></div>
+
+                <div class="form-group"><label for="kkal">Ккал</label><input type="text" class="form-control form-control-solid" id="kkal" name="kkal" rows="1"></input></div>
+                
+                <div class="form-group"><label for="protein">Белки</label><input type="text" class="form-control form-control-solid" id="protein" name="protein" rows="1"></input></div>
+
+                <div class="form-group"><label for="fat">Жиры</label><input type="text" class="form-control form-control-solid" id="fat" name="fat" rows="1"></input></div>
+
+                <div class="form-group"><label for="carbo">Углеводы</label><input type="text" class="form-control form-control-solid" id="carbo" name="carbo" rows="1"></input></div>
+                
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group"><label for="weight">Вес</label><input type="text" class="form-control form-control-solid" id="weight" name="weight" rows="1"></input></div>
+
+                <div class="form-group"><label for="favorite">Добавить в топ-меню</label>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" id="favorite" type="checkbox">
+                    <label class="custom-control-label" for="favorite">В топ-меню</label>
+                  </div>
+                </div>
+
+                <div class="form-group"><label for="sequence_number">Порядковый номер в сортировке</label><input type="text"class="form-control form-control-solid" id="sequence_number" name="sequence_number" rows="1"></input></div>
+
+                <div class="form-group"><label for="status">Статус вывода на экран</label>
+                  <div class="custom-control custom-radio custom-control-solid">
+                      <input class="custom-control-input" id="status_active" type="radio" name="status">
+                      <label class="custom-control-label" for="status_active">Показать</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-solid">
+                      <input class="custom-control-input" id="status_disable" type="radio" name="status">
+                      <label class="custom-control-label" for="status_disable">Отключить</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-solid">
+                      <input class="custom-control-input" id="status_unavailable" type="radio" name="status">
+                      <label class="custom-control-label" for="status_unavailable">Недоступен</label>
+                  </div>
+                </div>
+
+                <div class="form-group"><label for="photo">Фото</label><p><input id="photo" name="photo" type="file"></p></div>
+                
+                <div class="form-group"><label for="price">Стоимость</label><input type="text" class="form-control form-control-solid" id="price" name="price" rows="1"></input></div>
+
+                <div class="form-group"><label for="category_id">Категория товара</label>
+                <p><select name="category_id" style="width: 100%">
+                  <optgroup label="Японская кухня">
+                   <option value="r1">Закуска Барская</option>
+                   <option value="r2">Раки, фаршированные по-царски</option>
+                   <option value="r3">Биточки в горшочке</option>
+                  </optgroup>
+                  <optgroup label="Итальянская кухня">
+                   <option value="u1">Галушки славянские</option>
+                   <option value="u2">Пампушки украинские</option>
+                   <option value="u3">Жаркое по-харьковски</option>
+                  </optgroup>
+                  <optgroup label="Напитки"></optgroup>
+                  <optgroup label="Другие вкусняшки"></optgroup>
+                </select></p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-"></div>
+             <button class="btn btn-success btn-block">Отправить</button>
+            </div>
+
+          </form>
+          <!-- /.container-fluid -->
+
         </div>
-        <div class="row">
-
-            <div class="col-lg-6">
-             
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseProductName" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseProductName">
-                  <h6 class="m-0 font-weight-bold text-primary">Название товара</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseProductName">
-                  <div class="card-body">
-                    <input id="product_name" name="product_name" type="text" style="width: 100%">
-                  </div>
-                </div>
-              </div>
-
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseComment" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseComment">
-                  <h6 class="m-0 font-weight-bold text-primary">Описание товара</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseComment">
-                  <div class="card-body">
-                    <input id="comment" name="comment" type="text" style="width: 100%; height: 70px">
-                  </div>
-                </div>
-              </div>
-            
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseIngredient" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseIngredient">
-                  <h6 class="m-0 font-weight-bold text-primary">Ингредиенты</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseIngredient">
-                  <div class="card-body">
-                    <input id="ingredient" name="ingredient" type="text" style="width: 100%; height: 70px">
-                  </div>
-                </div>
-              </div>
-
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseKkal" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseKkal">
-                  <h6 class="m-0 font-weight-bold text-primary">Ккал</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseKkal">
-                  <div class="card-body">
-                    <input id="kkal" name="kkal" type="text" style="width: 100%">
-                  </div>
-                </div>
-              </div>
-              
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseProtein" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseProtein">
-                  <h6 class="m-0 font-weight-bold text-primary">Белки</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseProtein">
-                  <div class="card-body">
-                    <input id="protein" name="protein" type="text" style="width: 100%">
-                  </div>
-                </div>
-              </div>
-              
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseFat" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseFat">
-                  <h6 class="m-0 font-weight-bold text-primary">Жиры</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseFat">
-                  <div class="card-body">
-                    <input id="fat" name="fat" type="text" style="width: 100%">
-                  </div>
-                </div>
-              </div>
-
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseCarbo" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCarbo">
-                  <h6 class="m-0 font-weight-bold text-primary">Углеводы</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseCarbo">
-                  <div class="card-body">
-                    <input id="carbo" name="carbo" type="text" style="width: 100%">
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="col-lg-6">
-
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseWeight" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseWeight">
-                  <h6 class="m-0 font-weight-bold text-primary">Вес</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseWeight">
-                  <div class="card-body">
-                    <input id="weight" name="weight" type="text" style="width: 100%">
-                  </div>
-                </div>
-              </div>
-              
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseFavorite" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseFavorite">
-                  <h6 class="m-0 font-weight-bold text-primary">Добавить в топ-меню</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseFavorite">
-                  <div class="card-body">
-                    <input type="radio" id="favorite_yes" name="favorite" value="yes" checked>
-                    <label for="favorite_yes">Да</label>
-                    <br>
-                    <input type="radio" id="favorite_no" name="favorite" value="no">
-                    <label for="favorite_no">Нет</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseSequenceNumber" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseSequenceNumber">
-                  <h6 class="m-0 font-weight-bold text-primary">Порядковый номер в сортировке</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseSequenceNumber">
-                  <div class="card-body">
-                    <input id="sequence_number" name="sequence_number" type="text" style="width: 100%">
-                  </div>
-                </div>
-              </div>
-              
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseStatus" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseStatus">
-                  <h6 class="m-0 font-weight-bold text-primary">Статус вывода на экран</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseStatus">
-                  <div class="card-body">
-                    <input type="radio" id="status_active" name="status" value="active" checked>
-                    <label for="status_active">Показать</label>
-                    <br>
-                    <input type="radio" id="status_disable" name="status" value="disable">
-                    <label for="status_disable">Отключить</label>
-                    <br>
-                    <input type="radio" id="status_unavailable" name="status" value="unavailable">
-                    <label for="status_unavailable">Недоступен</label>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Collapsable Card Example -->
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapsePhoto" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePhoto">
-                  <h6 class="m-0 font-weight-bold text-primary">Фото</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapsePhoto">
-                  <div class="card-body">
-                    <input id="photo" name="photo" type="file">
-                  </div>
-                </div>
-              </div>
-             <!-- Collapsable Card Example -->
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapsePrice" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePrice">
-                  <h6 class="m-0 font-weight-bold text-primary">Стоимость</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapsePrice">
-                  <div class="card-body">
-                    <input id="price" name="price" type="text" style="width: 100%">
-                  </div>
-                </div>
-              </div>
-
-              <!-- Collapsable Card Example -->
-              <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseCategoryId" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCategoryId">
-                  <h6 class="m-0 font-weight-bold text-primary">Категория товара</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseCategoryId">
-                  <div class="card-body">
-                    <p><select name="category_id" style="width: 100%">
-                      <optgroup label="Японская кухня">
-                       <option value="r1">Закуска Барская</option>
-                       <option value="r2">Раки, фаршированные по-царски</option>
-                       <option value="r3">Биточки в горшочке</option>
-                      </optgroup>
-                      <optgroup label="Итальянская кухня">
-                       <option value="u1">Галушки славянские</option>
-                       <option value="u2">Пампушки украинские</option>
-                       <option value="u3">Жаркое по-харьковски</option>
-                      </optgroup>
-                      <optgroup label="Напитки"></optgroup>
-                      <optgroup label="Другие вкусняшки"></optgroup>
-                     </select></p>
-                  </div>
-                </div>
-              </div>
-
-              <input type="submit" value="Добавить">
-
-            </div>
-
-          </div>
-
-        <!-- /.container-fluid -->
-
-      </div>
-      <!-- End of Main Content -->
+       <!-- End of Main Content -->
 
       <!-- Footer -->
       <?php require_once ("footer.phtml");?>

@@ -67,7 +67,7 @@
                   </tfoot>
                   <tbody>
                     <?php foreach ($categories as $category): ?>
-                    <tr>
+                    <tr data-id="<?php echo $category['id'];?>"> <!--Пишем data-id чтобы повесить событие-->
                       <td><?php echo $category['id']; ?></td>
                       <td><?php echo $category['name']; ?></td>
                       <td><?php echo $category['in_menu'] ? 'Да' : 'Нет'; ?></td>
@@ -76,7 +76,9 @@
                       <td><?php echo $category['sequence_number']; ?></td>
                       <td><?php echo $category['parent_id'] ? $categories[$category['parent_id']]['name'] : 'Нет'; ?></td>
                       <td><a href="update"><img src="https://img.icons8.com/bubbles/40/000000/edit.png"/></a>
-                        <a href="/?section=admin_categories&operation=delete&id=<?php echo $category['id'];?>"><img src="https://img.icons8.com/bubbles/40/000000/delete-forever.png"/></a></td>
+                        <a href="/?section=admin_categories&operation=delete&id=<?php echo $category['id'];?>"><img src="https://img.icons8.com/bubbles/40/000000/delete-forever.png"/></a>
+                        <a name="delete" href="#"><img src="https://img.icons8.com/bubbles/60/000000/delete-forever.png"/></a>
+                      </td>
                     </tr>
                   <?php endforeach; ?>
                   </tbody>
@@ -133,6 +135,35 @@
 
   <!-- Page level custom scripts -->
   <script src="admin/js/demo/datatables-demo.js"></script>
+
+  <script>
+    $("[name=delete]").click(function (e) {
+      e.preventDefault();
+      let tr = $(e.target).parents().eq(2);
+      let id = tr.data("id"); // e- event - это информация о событии,target-кто вызвал - значок мусорки
+      //parents() - строит функцию родителей
+      //eq(2) - обращаемся к нужному родителю, учитывая степень вложенности
+      //data("id") - считываем id , который находится в параметре data-id
+
+      //Запрос на удаление:
+      $.ajax({
+        "url": "/?section=admin_categories_delete&id="+id, // +id , который равен $(e.target).parents().eq(2).data("id")
+        "method": "GET"
+      }).done(function(r) {  // r - response - возвращает всё с admin_categories_delete.route
+        console.log(r);
+        if (r.status == "error") {
+          for (var i = r.messages.length - 1; i >= 0; i--) {
+           toastr.error(r.messages[i]);             //toastr - библиотека для вывода сообщений на экран
+          }
+        } else {
+          $(tr).remove(); //JS удаление без перезагрузки из таблицы
+          toastr.success("Категория удалена успешно");
+        }
+      })
+      return false; //строка e.preventDefault(); и return false; работают в паре, чтоб не дергалась страница после перехаписи таблицы!!!!!
+    });
+  </script>
+
 </body>
 
 </html>
