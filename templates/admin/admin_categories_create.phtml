@@ -1,0 +1,149 @@
+<?php require_once ("top.phtml"); ?>
+<!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <?php require_once ("menu.phtml");?>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <?php require_once ("header.phtml");?>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+         
+
+          <form method="post">
+            <h1 class="h3 mb-4 text-gray-800">Форма добавления категорий</h1>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group"><label for="category_name">Название категории</label><input type="text" class="form-control form-control-solid" id="category_name" name="category_name" rows="1"></input></div>
+                <?php if (isset($errors['category_name'])):?>
+                  <label id="category_name-error" class="my-error" for="category_name"><?php echo $errors['category_name']; ?></label>
+                <?php endif; ?>
+
+                <div class="form-group"><label for="category_id">Выводить категорию после:</label>
+                <p><select name="category_id" style="width: 100%">
+                  <option disabled selected>Выберите родительскую категорию</option>
+                  <option style="font-weight: bold;">Новая родительская категория</option>
+                  <?php foreach ($categories as $category) : ?>
+                    <optgroup label="<?php echo $category['name']; ?>">
+                    <?php if(isset($category['children'])): ?>
+                      <?php foreach ($category['children'] as $child): ?>
+                        <option value="<?php echo $child['id'];?>"><?php echo $child['name'];?></option>
+                      <?php endforeach; ?>
+                    <?php else : ?>
+                      <option value="<?php echo $category['id'];?>">В эту категорию (<?php echo $category['name']; ?>)</option>
+                    <?php endif; ?>
+                  </optgroup>
+                  <?php endforeach; ?>
+                </select></p>
+                </div>
+                <?php if (isset($errors['category_id'])):?>
+                  <label id="category_id-error" class="my-error" for="category_id"><?php echo $errors['category_id']; ?></label>
+                <?php endif; ?>
+
+                <div class="form-group"><label for="image">Изображение</label><p><input id="image" name="image" type="file"></p></div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group"><label for="in_home">Добавить на главную страницу</label>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" id="in_home" name="in_home" type="checkbox">
+                    <label class="custom-control-label" for="in_home">На главную страниц</label>
+                  </div>
+                </div>
+
+                <div class="form-group"><label for="in_menu">Добавить в топ-меню</label>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" id="in_menu" name="in_menu" type="checkbox">
+                    <label class="custom-control-label" for="in_menu">В топ-меню</label>
+                  </div>
+                </div>
+
+                <div class="form-group"><label for="related_excluded">Добавить в рекомендации</label>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" id="related_excluded" name="related_excluded" type="checkbox">
+                    <label class="custom-control-label" for="related_excluded">Да</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-"></div>
+             <button class="btn btn-success btn-block" name="send">Отправить</button>
+            </div>
+
+          </form>
+          <!-- /.container-fluid -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <?php require_once ("footer.phtml");?>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <?php require_once ("bottom.phtml"); ?>
+
+  <!-- Page level plugins -->
+  <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="admin/js/demo/datatables-demo.js"></script>
+
+  <script>
+   
+  </script>
+
+</body>
+
+</html>
