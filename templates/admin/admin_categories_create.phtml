@@ -37,26 +37,22 @@
                   <label id="category_name-error" class="my-error" for="category_name"><?php echo $errors['category_name']; ?></label>
                 <?php endif; ?>
 
-                <div class="form-group"><label for="category_id">Выводить категорию после:</label>
-                <p><select name="category_id" style="width: 100%">
+                <div class="form-group"><label for="category_id">Родительская категория:</label>
+                <select name="category_id" style="width: 100%">
                   <option disabled selected>Выберите родительскую категорию</option>
-                  <option style="font-weight: bold;">Новая родительская категория</option>
+                  <option value="0">Новая родительская категория</option>
                   <?php foreach ($categories as $category) : ?>
-                    <optgroup label="<?php echo $category['name']; ?>">
-                    <?php if(isset($category['children'])): ?>
-                      <?php foreach ($category['children'] as $child): ?>
-                        <option value="<?php echo $child['id'];?>"><?php echo $child['name'];?></option>
-                      <?php endforeach; ?>
-                    <?php else : ?>
-                      <option value="<?php echo $category['id'];?>">В эту категорию (<?php echo $category['name']; ?>)</option>
-                    <?php endif; ?>
-                  </optgroup>
+                    <option value="<?php echo $category['id'];?>"><?php echo $category['name']; ?></option>
                   <?php endforeach; ?>
-                </select></p>
+                </select>
                 </div>
                 <?php if (isset($errors['category_id'])):?>
                   <label id="category_id-error" class="my-error" for="category_id"><?php echo $errors['category_id']; ?></label>
                 <?php endif; ?>
+                <div class="form-group" id="children_category" style="display: none;"><label for="children_id">Выводить категорию после:</label>
+                  <select name="children_id" style="width: 100%">
+                  </select>
+                </div>
 
                 <div class="form-group"><label for="image">Изображение</label><p><input id="image" name="image" type="file"></p></div>
               </div>
@@ -141,7 +137,20 @@
   <script src="admin/js/demo/datatables-demo.js"></script>
 
   <script>
-   
+    var child_categories =<?php echo json_encode($child_categories);?>;
+   $("[name=category_id]").change(function (e) {
+      var category_id = this.value;
+     //alert($(this).find(":selected").val()); //Один из вариантов получить айдишник
+     //alert( event.target.value ); //Один из вариантов получить айдишник
+     if (category_id != 0) {
+      $("[name=children_id]").empty();
+      $("[name=children_id]").append($("<option/>").val(0).text("В начале списка"));
+      for(var child_id in child_categories[category_id]) {
+        $("[name=children_id]").append($("<option/>").val(child_id).text(child_categories[category_id][child_id]));
+      } 
+      $("#children_category").show("fast");
+     }
+   })
   </script>
 
 </body>

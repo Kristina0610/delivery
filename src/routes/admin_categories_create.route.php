@@ -32,8 +32,10 @@ for ($i=0; $i < count($categories); $i++) {
 		$stmt_count->execute([$child['id']]);
 		$child['product_count'] = $stmt_count->fetchColumn();
 		$categories[$i]['children'][] = $child;
+		$child_categories[$categories[$i]['id']][$child['id']] = $child['name'];
 	}
 }
+//dump($child_categories);
 
 if (isset($_POST['send'])) {
 	foreach ($_POST as $key => $value) {
