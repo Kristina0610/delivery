@@ -14,3 +14,7 @@
 .change_for {
 	display: none;
 }
+
+.my-error {
+	color: red;
+}
