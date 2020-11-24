@@ -40,19 +40,31 @@
                 <div class="form-group"><label for="parent_id">Родительская категория:</label>
                 <select name="parent_id" style="width: 100%">
                   <option disabled selected >Выберите родительскую категорию</option>
-                  <option value="0">Новая родительская категория</option>
+                  <option value="0" 
+                  <?php echo (@$_POST['parent_id'] == 0) ? 'selected' : '';?>>
+                    Новая родительская категория
+                  </option>
                   <?php foreach ($categories as $category) : ?>
-                    <option value="<?php echo $category['id'];?>"><?php echo $category['name']; ?></option>
+                    <option value="<?php echo $category['id'];?>" 
+                      <?php echo (@$_POST['parent_id'] == $category['id']) ? 'selected' : '';?>>
+                      <?php echo $category['name']; ?>
+                    </option>
                   <?php endforeach; ?>
                 </select>
                 </div>
                 <?php if (isset($errors['parent_id'])):?>
                   <label id="parent_id-error" class="my-error" for="parent_id"><?php echo $errors['parent_id']; ?></label>
-                <?php endif; ?>
-                <div class="form-group" id="children_category" style="display: none;"><label for="children_id">Выводить категорию после:</label>
+                <?php endif; ?>  
+                <div class="form-group" id="children_category" style="display: <?php echo isset($_POST['children_id']) ? 'blocked' : 'none';?>;"><label for="children_id">Выводить категорию после:</label>
                   <select name="children_id" style="width: 100%">
+                    <?php if(isset($_POST['children_id'])) :?>
+                      <?php foreach($child_categories[$_POST['parent_id']] as $child) :?>
+                        <option value="<?php echo $child['id'];?>" <?php echo (@$_POST['children_id'] == $child['id']) ? 'selected' : '';?>><?php echo $child['name'];?></option>
+                      <?php endforeach;?>
+                    <?php endif;?>
                   </select>
                 </div>
+            
 
                 <div class="form-group"><label for="image">Изображение</label><p><input id="image" name="image" type="file"></p></div>
                 <?php if (isset($errors['image'])) : ?>
@@ -66,21 +78,21 @@
               <div class="col-lg-6">
                 <div class="form-group"><label for="in_home">Добавить на главную страницу</label>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" id="in_home" name="in_home" type="checkbox">
+                    <input class="custom-control-input" id="in_home" name="in_home" type="checkbox" <?php echo isset($_POST['in_home']) ? 'checked' : ''; ?>>
                     <label class="custom-control-label" for="in_home">На главную страниц</label>
                   </div>
                 </div>
 
                 <div class="form-group"><label for="in_menu">Добавить в топ-меню</label>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" id="in_menu" name="in_menu" type="checkbox">
+                    <input class="custom-control-input" id="in_menu" name="in_menu" type="checkbox" <?php echo isset($_POST['in_menu']) ? 'checked' : ''; ?>>
                     <label class="custom-control-label" for="in_menu">В топ-меню</label>
                   </div>
                 </div>
 
                 <div class="form-group"><label for="related_excluded">Добавить в рекомендации</label>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" id="related_excluded" name="related_excluded" type="checkbox">
+                    <input class="custom-control-input" id="related_excluded" name="related_excluded" type="checkbox" <?php echo isset($_POST['related_excluded']) ? 'checked' : ''; ?>>
                     <label class="custom-control-label" for="related_excluded">Да</label>
                   </div>
                 </div>
@@ -150,14 +162,17 @@
      //alert($(this).find(":selected").val()); //Один из вариантов получить айдишник
      //alert( event.target.value ); //Один из вариантов получить айдишник
      if (parent_id != 0) {
-      $("[name=children_id]").empty();
-      $("[name=children_id]").append($("<option/>").val(0).text("В начале списка"));
-      for(var index in child_categories[parent_id]) {
-        $("[name=children_id]").append($("<option/>").val(child_categories[parent_id][index]['id']).text(child_categories[parent_id][index]['name']));
-      } 
-      $("#children_category").show("fast");
-     }
-   })
+        $("[name=children_id]").empty();
+        $("[name=children_id]").append($("<option/>").val(0).text("В начале списка"));
+        for(var index in child_categories[parent_id]) {
+          $("[name=children_id]").append($("<option/>").val(child_categories[parent_id][index]['id']).text(child_categories[parent_id][index]['name']));
+        } 
+        $("#children_category").show("fast");
+     } else {
+        $("[name=children_id]").empty();
+        $("#children_category").hide("fast");
+      }
+    })
   </script>
 
 </body>

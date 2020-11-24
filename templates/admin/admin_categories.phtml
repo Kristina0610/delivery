@@ -37,7 +37,7 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block; line-height: 2.4rem;">Категории товаров</h6>
-              <button class="btn btn-primary float-right" onclick="location.href='/?section=admin_categories_create';" type="button">Добавить категорию</button>
+              <button class="btn btn-primary float-right" onclick="location.href='/?section=admin_categories_store';" type="button">Добавить категорию</button>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -76,7 +76,7 @@
                       <td><?php echo $category['image'] ? 'Есть' : 'Нет'; ?></td>
                       <td><?php echo $category['sequence_number']; ?></td>
                       <td><?php echo $category['parent_id'] ? $categories[$category['parent_id']]['name'] : 'Нет'; ?></td>
-                      <td><a href="update"><img src="https://img.icons8.com/bubbles/40/000000/edit.png"/></a>
+                      <td><a href="/?section=admin_categories_store&id=<?php echo $category['id'];?>"><img src="https://img.icons8.com/bubbles/40/000000/edit.png"/></a>
                         <a href="/?section=admin_categories&operation=delete&id=<?php echo $category['id'];?>"><img src="https://img.icons8.com/bubbles/40/000000/delete-forever.png"/></a>
                         <a name="delete" href="#"><img src="https://img.icons8.com/bubbles/60/000000/delete-forever.png"/></a>
                       </td>

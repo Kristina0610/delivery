@@ -2,23 +2,6 @@
 include("../src/connect.php");
 include("../src/is_admin.php");
 
-/*$stmt = $pdo->prepare("SELECT * FROM delivery_categories");
-$stmt->execute();
-$categories = $stmt->fetchAll();
-
-
-$child = [];
-foreach ($categories as $category) {
-	if (!$category['parent_id']) {
-		$stmt_child = $pdo->prepare("SELECT * FROM delivery_categories WHERE parent_id = ?");
-		$stmt_child->execute([$category['id']]);
-		$child[] = $stmt_child->fetchAll();
-	}
-}
-dump($child);
-foreach ($child as $key => $value) {
-	echo($value);
-}*/
 
 $stmt = $pdo->prepare("SELECT * FROM delivery_categories WHERE parent_id IS NULL ORDER BY sequence_number ASC");
 $stmt->execute();
@@ -38,7 +21,7 @@ for ($i=0; $i < count($categories); $i++) {
 		];
 	}
 }
-//dump($child_categories);
+
 
 if (isset($_POST['send'])) {
 	foreach ($_POST as $key => $value) {
@@ -48,14 +31,18 @@ if (isset($_POST['send'])) {
 
 	if (empty($_POST['name'])) {
 		$errors['name'] = "Укажите название категории";
+	} else {
+		$stmt = $pdo->prepare("SELECT name FROM delivery_categories WHERE LOWER(name) LIKE LOWER(?)");
+		$stmt->execute([$_POST['name']]);
+		if ($stmt->fetch()) {
+			$errors['name'] = "Данная категория уже существует в базе данных";
+		}
 	}
-
 	if (!isset($_POST['parent_id'])) {
 		$errors['parent_id'] = "Выберите категорию, после которой будет выводиться новая категория"; 
 	}
 
-
-	if (isset($_FILES['image'])) {
+	if ($_FILES['image']['error'] == 0) {
 		$type = $_FILES['image']['type'];
 		$size = round($_FILES['image']['size']/1024,1);
 
@@ -75,11 +62,8 @@ if (isset($_POST['send'])) {
 		if($proportion < 0.9 || $proportion > 1.1) {
 			$errors['image'][] = "Пропорции изображения не соответствуют требованиям";
 		}
-		//dump($proportion);
 	}
 
-	
-	
 	if (!$errors) {
 		try  {
 			$pdo->beginTransaction();
@@ -115,19 +99,17 @@ if (isset($_POST['send'])) {
 			}
 			//dump($sequence_number+1);
 
-			if(count($_FILES)) {
+			if($_FILES['image']['error'] == 0) {
 				$ext = pathinfo($_FILES['image']['name'])['extension'];           // $ext - расширение файла
 				$image_name = md5(uniqid())."-".time().".".$ext;                 // Формируем уникальное имя файла
-				if(!move_uploaded_file($_FILES['image']['tmp_name'], "images/in_home/".$image_name)) {   // кладем файл с новым именем в нужную папку
-					throw new Exception("Ошибка записи файла в папку", 1);
-					
-				}    
-				// 'tmp_name' - иям файла во временном хранилище
 			}
 
 			$stmt = $pdo->prepare("INSERT INTO delivery_categories (name,in_menu,in_home,image,sequence_number,related_excluded,parent_id) VALUES(?,?,?,?,?,?,?)");
 			$stmt->execute([$category_name,$in_menu,$in_home,$image_name, ($sequence_number+1),$related_excluded,$_POST['parent_id']]);
-
+			$last_id = $pdo->lastInsertId();
+			if(!move_uploaded_file($_FILES['image']['tmp_name'], "images/in_home/".$image_name)) {   // кладем файл с новым именем в нужную папку
+				throw new Exception("Ошибка записи файла в папку", 1);	
+			}  
 			$pdo->commit();
 				
 			header("Location: /?section=admin_categories");
@@ -135,12 +117,19 @@ if (isset($_POST['send'])) {
 		} catch(Exception $e) {
 			$errors[] = "Попробуйте выполнить запрос позже или обратитесь к администратору";
 			$pdo->rollback();
-			unlink("images/in_home/".$image_name);  //удаляем файл
+		//	unlink("images/in_home/".$image_name);  //удаляем файл
 			dump($e->getMessage());
 		}
 
 	}
 }
-//dump($_POST);
+
+
+if (isset($_GET['id'])) {
+	$stmt = $pdo->prepare("SELECT * FROM delivery_categories WHERE id = ?");
+	$stmt->execute([$_GET['id']]);
+	$fields = $stmt->fetch();
+	dump($fields);
+}
 //dump($image_name);
-include ("../templates/admin/admin_categories_create.phtml");
+include ("../templates/admin/admin_categories_store.phtml");
