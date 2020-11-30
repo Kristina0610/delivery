@@ -98,7 +98,7 @@ if (isset($_POST['send'])) {
 				$sequence_number = $stmt->fetchColumn();
 			}
 			//dump($sequence_number+1);
-
+			$image_name = NULL;
 			if($_FILES['image']['error'] == 0) {
 				$ext = pathinfo($_FILES['image']['name'])['extension'];           // $ext - расширение файла
 				$image_name = md5(uniqid())."-".time().".".$ext;                 // Формируем уникальное имя файла
@@ -130,6 +130,7 @@ if (isset($_GET['id'])) {
 	$stmt->execute([$_GET['id']]);
 	$fields = $stmt->fetch();
 	dump($fields);
-}
+} 
+$fields = isset($_POST['send']) ? $_POST : @$fields;
 //dump($image_name);
 include ("../templates/admin/admin_categories_store.phtml");

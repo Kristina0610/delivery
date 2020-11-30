@@ -29,10 +29,10 @@
          
 
           <form method="post" enctype="multipart/form-data">
-            <h1 class="h3 mb-4 text-gray-800">Форма добавления категорий</h1>
+            <h1 class="h3 mb-4 text-gray-800">Форма <?php echo @$_GET['id'] ? 'редактирования' : 'добавления';?>  категорий</h1>
             <div class="row">
               <div class="col-lg-6">
-                <div class="form-group"><label for="name">Название категории</label><input type="text" class="form-control form-control-solid" id="name" name="name" rows="1" value="<?php echo @$_POST['name'];?>"></input></div>
+                <div class="form-group"><label for="name">Название категории</label><input type="text" class="form-control form-control-solid" id="name" name="name" rows="1" value="<?php echo @$fields['name'];?>"></input></div>
                 <?php if (isset($errors['name'])):?>
                   <label id="name-error" class="my-error" for="name"><?php echo $errors['name']; ?></label>
                 <?php endif; ?>
@@ -41,12 +41,12 @@
                 <select name="parent_id" style="width: 100%">
                   <option disabled selected >Выберите родительскую категорию</option>
                   <option value="0" 
-                  <?php echo (@$_POST['parent_id'] == 0) ? 'selected' : '';?>>
+                  <?php echo (@$fields['parent_id'] == 0) ? 'selected' : '';?>>
                     Новая родительская категория
                   </option>
                   <?php foreach ($categories as $category) : ?>
                     <option value="<?php echo $category['id'];?>" 
-                      <?php echo (@$_POST['parent_id'] == $category['id']) ? 'selected' : '';?>>
+                      <?php echo (@$fields['parent_id'] == $category['id']) ? 'selected' : '';?>>
                       <?php echo $category['name']; ?>
                     </option>
                   <?php endforeach; ?>
@@ -55,11 +55,11 @@
                 <?php if (isset($errors['parent_id'])):?>
                   <label id="parent_id-error" class="my-error" for="parent_id"><?php echo $errors['parent_id']; ?></label>
                 <?php endif; ?>  
-                <div class="form-group" id="children_category" style="display: <?php echo isset($_POST['children_id']) ? 'blocked' : 'none';?>;"><label for="children_id">Выводить категорию после:</label>
+                <div class="form-group" id="children_category" style="display: <?php echo isset($fields['parent_id']) ? 'blocked' : 'none';?>;"><label for="children_id">Выводить категорию после:</label>
                   <select name="children_id" style="width: 100%">
-                    <?php if(isset($_POST['children_id'])) :?>
-                      <?php foreach($child_categories[$_POST['parent_id']] as $child) :?>
-                        <option value="<?php echo $child['id'];?>" <?php echo (@$_POST['children_id'] == $child['id']) ? 'selected' : '';?>><?php echo $child['name'];?></option>
+                    <?php if(isset($fields['parent_id'])) :?>
+                      <?php foreach($child_categories[$fields['parent_id']] as $child) :?>
+                        <option value="<?php echo $child['id'];?>" <?php echo (@$fields['children_id'] == $child['id']) ? 'selected' : '';?>><?php echo $child['name'];?></option>
                       <?php endforeach;?>
                     <?php endif;?>
                   </select>
@@ -78,21 +78,21 @@
               <div class="col-lg-6">
                 <div class="form-group"><label for="in_home">Добавить на главную страницу</label>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" id="in_home" name="in_home" type="checkbox" <?php echo isset($_POST['in_home']) ? 'checked' : ''; ?>>
+                    <input class="custom-control-input" id="in_home" name="in_home" type="checkbox" <?php echo isset($fields['in_home']) ? 'checked' : ''; ?>>
                     <label class="custom-control-label" for="in_home">На главную страниц</label>
                   </div>
                 </div>
 
                 <div class="form-group"><label for="in_menu">Добавить в топ-меню</label>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" id="in_menu" name="in_menu" type="checkbox" <?php echo isset($_POST['in_menu']) ? 'checked' : ''; ?>>
+                    <input class="custom-control-input" id="in_menu" name="in_menu" type="checkbox" <?php echo isset($fields['in_menu']) ? 'checked' : ''; ?>>
                     <label class="custom-control-label" for="in_menu">В топ-меню</label>
                   </div>
                 </div>
 
                 <div class="form-group"><label for="related_excluded">Добавить в рекомендации</label>
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" id="related_excluded" name="related_excluded" type="checkbox" <?php echo isset($_POST['related_excluded']) ? 'checked' : ''; ?>>
+                    <input class="custom-control-input" id="related_excluded" name="related_excluded" type="checkbox" <?php echo isset($fields['related_excluded']) ? 'checked' : ''; ?>>
                     <label class="custom-control-label" for="related_excluded">Да</label>
                   </div>
                 </div>

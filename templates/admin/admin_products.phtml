@@ -27,17 +27,17 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-         <!-- <p class="mb-4">
+          <p class="mb-4">
             <?php foreach($errors as $error):?>
               <?php echo $error."<br>";?>
             <?php endforeach;?>
-          </p>-->
+          </p>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block; line-height: 2.4rem;">Категории товаров</h6>
-              <button class="btn btn-primary float-right" onclick="location.href='/?section=admin_products_create';" type="button">Добавить продукт</button>
+              <button class="btn btn-primary float-right" onclick="location.href='/?section=admin_products_store';" type="button">Добавить продукт</button>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -46,18 +46,11 @@
                     <tr>
                       <th>ID</th>
                       <th>Название</th>
-                      <th>Описание</th>
                       <th>Ингридиенты</th>
-                      <th>Вес</th>
-                      <th>Ккал</th>
-                      <th>Белки</th>
-                      <th>Жиры</th>
-                      <th>Углеводы</th>
+                      <th>Вес, г</th>
                       <th>Топ-меню</th>
-                      <th>Порядковый номер</th>
                       <th>Отображение на сайте</th>
-                      <th>Изображение</th>
-                      <th>Цена</th>
+                      <th>Цена, &#8381;</th>
                       <th>Название категории</th>
                       <th>Операции</th>
                     </tr>
@@ -66,17 +59,11 @@
                     <tr>
                       <th>ID</th>
                       <th>Название</th>
-                      <th>Описание</th>
                       <th>Ингридиенты</th>
-                      <th>Вес</th>
-                      <th>Ккал</th>
-                      <th>Белки</th>
-                      <th>Жиры</th>
-                      <th>Углеводы</th>
+                      <th>Вес, г</th>
                       <th>Топ-меню</th>
-                      <th>Порядковый номер</th>
-                      <th>Изображение</th>
-                      <th>Цена</th>
+                      <th>Отображение на сайте</th>
+                      <th>Цена, &#8381;</th>
                       <th>Название категории</th>
                       <th>Операции</th>
                     </tr>
@@ -86,22 +73,26 @@
                     <tr data-id="<?php echo $product['id'];?>"> <!--Пишем data-id чтобы повесить событие-->
                       <td><?php echo $product['id']; ?></td>
                       <td><?php echo $product['name']; ?></td>
-                      <td><?php echo $product['comment']; ?></td>
-                      <td><?php echo $product['ingredients'];?></td>
+                      <td><?php echo trim(str_replace(['"','[',']'], '', $product['ingredients']));?></td>
                       <td><?php echo $product['weight'];?></td>
-                      <td><?php echo $product['kkal'];?></td>
-                      <td><?php echo $product['protein'];?></td>
-                      <td><?php echo $product['fat'];?></td>
-                      <td><?php echo $product['carbo'];?></td>
                       <td><?php echo $product['favorite'] ? 'Да' : 'Нет'; ?></td>
-                      <td><?php echo $product['sequence_number'];?></td>
-                      <td><?php echo $product['status'];?></td>
-                      <td><?php echo $product['photo'];?></td>
+                      <td>
+                            <?php switch($product['status']) : case "active":?>
+                            <?php echo "активен";?>
+                            <?php break;?>
+                            <?php case 'disable':?>
+                            <?php echo "отключен";?>
+                            <?php break;?>
+                            <?php case 'unavailable':?>
+                            <?php echo "недоступен";?>
+                            <?php break;?>
+                            <?php endswitch;?>
+                      </td>
                       <td><?php echo $product['price'];?></td>
                       <td><?php echo $product['category_name'];?></td>
                       <td><a href="update"><img src="https://img.icons8.com/bubbles/40/000000/edit.png"/></a>
-                        <a href="/?section=admin_categories&operation=delete&id=<?php echo $category['id'];?>"><img src="https://img.icons8.com/bubbles/40/000000/delete-forever.png"/></a>
-                        <a name="delete" href="#"><img src="https://img.icons8.com/bubbles/60/000000/delete-forever.png"/></a>
+                        <a href="/?section=admin_products&operation=delete&id=<?php echo $product['id'];?>"><img src="https://img.icons8.com/bubbles/40/000000/delete-forever.png"/></a>
+                        <!--<a name="delete" href="#"><img src="https://img.icons8.com/bubbles/60/000000/delete-forever.png"/></a>-->
                       </td>
                     </tr>
                   <?php endforeach; ?>
@@ -160,7 +151,7 @@
   <!-- Page level custom scripts -->
   <script src="admin/js/demo/datatables-demo.js"></script>
 
-  <script>
+  <!--<script>
     $("[name=delete]").click(function (e) {
       e.preventDefault();
       let tr = $(e.target).parents().eq(2);
@@ -186,7 +177,7 @@
       })
       return false; //строка e.preventDefault(); и return false; работают в паре, чтоб не дергалась страница после перехаписи таблицы!!!!!
     });
-  </script>
+  </script>-->
 
 </body>
 
