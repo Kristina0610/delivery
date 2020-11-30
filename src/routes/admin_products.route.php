@@ -22,20 +22,20 @@ switch (@$_GET['operation']) {
 					$errors[] = "Данный продукт найден в истории заказов";
 				}
 			}
-		}
-		if (!$errors) {
-			try {
-				$stmt = $pdo->prepare("DELETE FROM delivery_products WHERE id = ?");
-				$stmt->execute([$_GET['id']]);
-				if ($stmt->rowCount() > 0) {
-					header("Location: /?section=admin_products");
-					exit;
+			if (!$errors) {
+				try {
+					$stmt = $pdo->prepare("DELETE FROM delivery_products WHERE id = ?");
+					$stmt->execute([$_GET['id']]);
+					if ($stmt->rowCount() > 0) {
+						header("Location: /?section=admin_products");
+						exit;
+					}
+				} catch (Exception $e) {
+					$errors[] = "Системная ошибка, попробуйте удалить позже";
 				}
-			} catch (Exception $e) {
-				$errors[] = "Системная ошибка, попробуйте удалить позже";
 			}
-		}
-		break; 
+			break; 
+		}	
 }
 
 $stmt = $pdo->query("SELECT delivery_products.*, delivery_categories.name as category_name FROM delivery_categories, delivery_products WHERE delivery_products.category_id=delivery_categories.id");

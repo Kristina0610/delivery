@@ -92,7 +92,7 @@
                       <td><?php echo $product['category_name'];?></td>
                       <td><a href="update"><img src="https://img.icons8.com/bubbles/40/000000/edit.png"/></a>
                         <a href="/?section=admin_products&operation=delete&id=<?php echo $product['id'];?>"><img src="https://img.icons8.com/bubbles/40/000000/delete-forever.png"/></a>
-                        <!--<a name="delete" href="#"><img src="https://img.icons8.com/bubbles/60/000000/delete-forever.png"/></a>-->
+                        <a name="delete" href="#"><img src="https://img.icons8.com/bubbles/60/000000/delete-forever.png"/></a>
                       </td>
                     </tr>
                   <?php endforeach; ?>
@@ -149,36 +149,51 @@
   <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="admin/js/demo/datatables-demo.js"></script>
+  <script src="admin/js/demo/datatables-demo.js"></script>  
 
-  <!--<script>
-    $("[name=delete]").click(function (e) {
+  <script>
+    /*$("[name=delete]").click(function (e) {
       e.preventDefault();
       let tr = $(e.target).parents().eq(2);
-      let id = tr.data("id"); // e- event - это информация о событии,target-кто вызвал - значок мусорки
-      //parents() - строит функцию родителей
-      //eq(2) - обращаемся к нужному родителю, учитывая степень вложенности
-      //data("id") - считываем id , который находится в параметре data-id
-
-      //Запрос на удаление:
+      let id = tr.data("id");
       $.ajax({
-        "url": "/?section=admin_categories_delete&id="+id, // +id , который равен $(e.target).parents().eq(2).data("id")
+        "url": "/?section=admin_products_delete&id="+id,
         "method": "GET"
-      }).done(function(r) {  // r - response - возвращает всё с admin_categories_delete.route
-        console.log(r);
+      }).done(function (r) {
         if (r.status == "error") {
           for (var i = r.messages.length - 1; i >= 0; i--) {
-           toastr.error(r.messages[i]);             //toastr - библиотека для вывода сообщений на экран
+            toastr.error(r.messages[i]);
           }
         } else {
-          $(tr).remove(); //JS удаление без перезагрузки из таблицы
-          toastr.success("Категория удалена успешно");
+          $(tr).remove();
+          toastr.success("Продукт успешно удален");
         }
       })
-      return false; //строка e.preventDefault(); и return false; работают в паре, чтоб не дергалась страница после перехаписи таблицы!!!!!
-    });
-  </script>-->
+      return false;
+    });*/
 
+
+  $("[name=delete]").click(function (e) {
+    e.preventDefault();
+    let tr = $(e.target).parents().eq(2);
+    let id = tr.data("id");
+    $.ajax({
+      "url": "/?section=admin_products_delete&id="+id,
+      "method": "GET"
+    }).done(function (r) {
+      if (r.status == "error") {
+        for (var i = r.messages.length - 1; i >= 0; i--) {
+          toastr.error(r.messages[i]);
+        }
+      } else {
+        $(tr).remove();
+        toastr.success("Продукт успешно удален");
+      }
+    })
+
+    return false;
+  });
+  </script>
 </body>
 
 </html>
